@@ -106,6 +106,16 @@ Players tell me the jump "sometimes doesn't respond."
 Sound works in Chrome but there's nothing on iPhone.
 ```
 
+### 🌐 Pattern C — claude.ai (web)
+
+A ready-built archive lives at [`dist/intuitive-game-design.zip`](dist/intuitive-game-design.zip) — it's rebuilt straight from this repo's tracked files, so it always matches what's on GitHub.
+
+1. In claude.ai, open **Settings → Capabilities** and turn on **Code execution and file creation** if the Skills menu is greyed out (Free/Pro/Max plans only; Team and Enterprise have it on by default).
+2. Go to **Settings → Skills → Create skill**.
+3. Upload `dist/intuitive-game-design.zip`.
+
+> claude.ai only accepts a `.zip` extension, and the archive must contain a single top-level folder holding `SKILL.md` directly — `dist/intuitive-game-design.zip` is already built that way. Rebuild it yourself with `python3 scripts/package.py` after editing the skill.
+
 ### 🛠️ Pattern D — From source
 
 Verify everything runs before installing:
@@ -163,7 +173,8 @@ references/audio/     Web Audio, Tone.js, generative AI, platform pitfalls
 workflows/            Design pipeline · Intuition audit · Playtest protocol
 assets/               Runnable: juice controller, chunk generator, audio engine, SFX library
 feedback/             The improvement loop
-scripts/              Log → regression test
+scripts/              Log → regression test · package.py rebuilds the claude.ai zip
+dist/                 Pre-built .zip for claude.ai (Settings → Skills)
 ```
 
 ---

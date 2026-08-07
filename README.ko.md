@@ -106,6 +106,16 @@ Claude Code는 두 위치에서 skill을 읽습니다. 프로젝트 경로에 �
 Chrome에서는 소리가 나는데 iPhone에서는 아무 소리도 안 납니다
 ```
 
+### 🌐 패턴 C — claude.ai(웹)
+
+이 저장소가 추적하는 파일로 직접 만든 압축 파일이 [`dist/intuitive-game-design.zip`](dist/intuitive-game-design.zip)에 이미 준비되어 있습니다. 항상 GitHub의 내용과 일치합니다.
+
+1. claude.ai에서 **설정 → Capabilities**를 열고, Skills 메뉴가 비활성화되어 있으면 **Code execution and file creation**을 켭니다(Free/Pro/Max 플랜만 해당. Team·Enterprise는 기본으로 켜져 있습니다).
+2. **설정 → Skills → Create skill**로 이동합니다.
+3. `dist/intuitive-game-design.zip`을 업로드합니다.
+
+> claude.ai는 `.zip` 확장자만 허용하며, 압축 파일 안에는 `SKILL.md`가 바로 들어 있는 최상위 폴더 하나만 있어야 합니다. `dist/intuitive-game-design.zip`은 이미 이 구조로 만들어져 있습니다. skill을 수정한 뒤에는 `python3 scripts/package.py`로 다시 만들 수 있습니다.
+
 ### 🛠️ 패턴 D — 소스에서
 
 설치 전에 동작을 확인하려면:
@@ -163,7 +173,8 @@ references/audio/     Web Audio, Tone.js, 생성형 AI, 플랫폼 함정
 workflows/            설계 파이프라인 · 직관성 점검 · 플레이 테스트
 assets/               동작하는 구현: 손맛 보정, 지형 생성, 오디오 엔진, 효과음
 feedback/             개선 루프
-scripts/              로그 → 회귀 테스트
+scripts/              로그 → 회귀 테스트 · package.py로 claude.ai용 zip 재생성
+dist/                 claude.ai용 빌드된 zip(설정 → Skills)
 ```
 
 ---

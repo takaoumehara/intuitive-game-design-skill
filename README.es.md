@@ -106,6 +106,16 @@ Los testers dicen que el salto «a veces no responde»
 En Chrome suena, pero en iPhone no se oye nada
 ```
 
+### 🌐 Patrón C — claude.ai (web)
+
+El repositorio ya incluye un archivo listo en [`dist/intuitive-game-design.zip`](dist/intuitive-game-design.zip), generado directamente a partir de los archivos versionados en este repositorio, así que siempre coincide con lo que hay en GitHub.
+
+1. En claude.ai, abre **Settings → Capabilities** y activa **Code execution and file creation** si el menú de Skills aparece deshabilitado (solo hace falta en los planes Free/Pro/Max; en Team y Enterprise ya viene activado).
+2. Ve a **Settings → Skills → Create skill**.
+3. Sube `dist/intuitive-game-design.zip`.
+
+> claude.ai solo acepta la extensión `.zip`, y el archivo debe contener una única carpeta de nivel superior con `SKILL.md` directamente dentro. `dist/intuitive-game-design.zip` ya tiene esa estructura. Puedes regenerarlo con `python3 scripts/package.py` después de editar el skill.
+
 ### 🛠️ Patrón D — Desde el código fuente
 
 Comprueba que todo funciona antes de instalarlo:
@@ -163,7 +173,8 @@ references/audio/     Web Audio, Tone.js, IA generativa, trampas de cada platafo
 workflows/            Diseño · Auditoría de intuición · Protocolo de pruebas
 assets/               Código ejecutable: sensación, generador de niveles, audio, efectos
 feedback/             El ciclo de mejora
-scripts/              Registro → prueba de regresión
+scripts/              Registro → prueba de regresión · package.py regenera el zip de claude.ai
+dist/                 Zip listo para claude.ai (Settings → Skills)
 ```
 
 ---

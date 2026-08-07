@@ -106,6 +106,16 @@ Claude Code 会从两个位置读取 skill。放在项目目录下，可以通�
 Chrome 里有声音，iPhone 上一点声音都没有
 ```
 
+### 🌐 方式 C —— claude.ai（网页版）
+
+仓库里已经有构建好的压缩包 [`dist/intuitive-game-design.zip`](dist/intuitive-game-design.zip)，它直接从这个仓库跟踪的文件生成，始终和 GitHub 上的内容一致。
+
+1. 在 claude.ai 打开 **Settings → Capabilities**，如果 Skills 菜单是灰的，就打开 **Code execution and file creation**（仅 Free/Pro/Max 需要手动开启，Team 和 Enterprise 默认已开）。
+2. 打开 **Settings → Skills → Create skill**。
+3. 上传 `dist/intuitive-game-design.zip`。
+
+> claude.ai 只接受 `.zip` 扩展名，压缩包里必须只有一个顶层文件夹，`SKILL.md` 直接放在里面 —— `dist/intuitive-game-design.zip` 已经是这个结构。改动 skill 之后用 `python3 scripts/package.py` 重新生成即可。
+
 ### 🛠️ 方式 D —— 从源码
 
 安装前先确认能跑起来：
@@ -163,7 +173,8 @@ references/audio/     Web Audio、Tone.js、生成式 AI、平台坑点
 workflows/            设计流程 · 直觉性审查 · 玩家测试protocol
 assets/               可运行实现：手感修正、地形生成、音频引擎、音效库
 feedback/             改进闭环
-scripts/              日志 → 回归测试
+scripts/              日志 → 回归测试 · package.py 重新生成 claude.ai 用的压缩包
+dist/                 claude.ai 用的构建好的压缩包（Settings → Skills）
 ```
 
 ---
