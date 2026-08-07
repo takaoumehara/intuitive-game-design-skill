@@ -1,6 +1,7 @@
 # ⚡ intuitive-game-design
 
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-Skill-D97757)](https://claude.com/claude-code)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Eval](https://img.shields.io/badge/eval-97%25%20vs%2066%25%20baseline-2ea44f)](#-does-it-actually-work)
 [![Languages](https://img.shields.io/badge/README-5%20languages-blue)](#-intuitive-game-design)
 
@@ -169,4 +170,4 @@ scripts/              Log → regression test
 
 ## 📄 License
 
-No license file yet — all rights reserved by default until one is added. If you want this to be reusable by others, add a `LICENSE` file.
+[MIT](LICENSE)

@@ -1,6 +1,7 @@
 # ⚡ intuitive-game-design
 
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-Skill-D97757)](https://claude.com/claude-code)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Eval](https://img.shields.io/badge/eval-97%25%20vs%2066%25%20baseline-2ea44f)](#-funciona-de-verdad)
 [![Languages](https://img.shields.io/badge/README-5%20languages-blue)](#-intuitive-game-design)
 
@@ -169,4 +170,4 @@ scripts/              Registro → prueba de regresión
 
 ## 📄 Licencia
 
-Todavía no hay archivo de licencia. Sin uno, por defecto se reservan todos los derechos. Si quieres que otras personas puedan reutilizarlo, añade un archivo `LICENSE`.
+[MIT](LICENSE)

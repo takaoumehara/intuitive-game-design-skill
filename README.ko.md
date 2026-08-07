@@ -1,6 +1,7 @@
 # ⚡ intuitive-game-design
 
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-Skill-D97757)](https://claude.com/claude-code)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Eval](https://img.shields.io/badge/eval-97%25%20vs%2066%25%20baseline-2ea44f)](#-정말-효과가-있나요)
 [![Languages](https://img.shields.io/badge/README-5%20languages-blue)](#-intuitive-game-design)
 
@@ -169,4 +170,4 @@ scripts/              로그 → 회귀 테스트
 
 ## 📄 라이선스
 
-아직 라이선스 파일이 없습니다. 지정하지 않으면 기본적으로 모든 권리가 저작권자에게 유보됩니다. 다른 사람이 재사용할 수 있게 하려면 `LICENSE` 파일을 추가하세요.
+[MIT](LICENSE)

@@ -1,6 +1,7 @@
 # ⚡ intuitive-game-design
 
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-Skill-D97757)](https://claude.com/claude-code)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Eval](https://img.shields.io/badge/eval-97%25%20vs%2066%25%20baseline-2ea44f)](#-真的有效吗)
 [![Languages](https://img.shields.io/badge/README-5%20languages-blue)](#-intuitive-game-design)
 
@@ -169,4 +170,4 @@ scripts/              日志 → 回归测试
 
 ## 📄 许可证
 
-目前还没有许可证文件。未指定时，默认保留全部权利。如果希望别人可以复用，请添加 `LICENSE` 文件。
+[MIT](LICENSE)
