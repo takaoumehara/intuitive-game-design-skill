@@ -23,7 +23,7 @@ Games work the same way. This skill turns "you'll understand once I explain it" 
 
 ```mermaid
 flowchart TD
-    U["👤 What you ask"] --> R{"🧭 Router<br/>picks 1 of 6 paths"}
+    U["👤 What you ask"] --> R{"🧭 Router<br/>picks 1 of 7 paths"}
 
     R -->|"Design something new"| A["📐 Mechanics pipeline<br/>7 questions → core rules"]
     R -->|"It's confusing"| B["🔍 Intuition audit<br/>10-point score → P0/P1/P2 fixes"]
@@ -31,8 +31,9 @@ flowchart TD
     R -->|"Run a playtest"| D["🧪 CARD / ORID protocol"]
     R -->|"One-tap game / feel"| E["🕹️ Physics, juice,<br/>endless generation"]
     R -->|"Make the sound"| F["🔊 Web Audio, Tone.js,<br/>latency, iOS"]
+    R -->|"What should I build it with?"| G["📱 Tech choice<br/>mobile-safe vs PC-only"]
 
-    A & B & C & D & E & F --> Q["✅ 5 questions<br/>every answer passes"]
+    A & B & C & D & E & F & G --> Q["✅ 5 questions<br/>every answer passes"]
     Q --> O["📄 Grounds · How to verify<br/>Priority · What was rejected"]
     O --> L["📝 feedback/log.md"]
     L -->|"hand it back"| FIX["🔁 Skill fix + regression test"]
@@ -166,10 +167,11 @@ The lower variance matters more than the average. A skill that scores well only 
 ## 📁 What's inside
 
 ```
-SKILL.md              Router — 6 paths, 5 questions, the lines not to cross
+SKILL.md              Router — 7 paths, 5 questions, the lines not to cross
 references/core/      Affordance, MDA, cognitive load, rhythm & synesthesia
 references/simple/    One-tap mechanics, juice, procedural generation, a canon of hits
 references/audio/     Web Audio, Tone.js, generative AI, platform pitfalls
+references/web-stack.md  Every web visual + audio tech, split by mobile-safe vs PC-only
 workflows/            Design pipeline · Intuition audit · Playtest protocol
 assets/               Runnable: juice controller, chunk generator, audio engine, SFX library
 feedback/             The improvement loop

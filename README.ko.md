@@ -23,7 +23,7 @@
 
 ```mermaid
 flowchart TD
-    U["👤 질문 내용"] --> R{"🧭 6개 경로 중 선택"}
+    U["👤 질문 내용"] --> R{"🧭 7개 경로 중 선택"}
 
     R -->|"처음부터 설계"| A["📐 메커닉 설계<br/>7개 질문 → 핵심 규칙"]
     R -->|"이해를 못 한다"| B["🔍 직관성 점검<br/>10항목 채점 → P0/P1/P2"]
@@ -31,8 +31,9 @@ flowchart TD
     R -->|"플레이 테스트"| D["🧪 CARD / ORID"]
     R -->|"원터치 게임·손맛"| E["🕹️ 물리, juice,<br/>무한 생성"]
     R -->|"소리 구현"| F["🔊 Web Audio, Tone.js,<br/>지연, iOS"]
+    R -->|"무엇으로 만들지"| G["📱 기술 선택<br/>모바일 / PC 분류"]
 
-    A & B & C & D & E & F --> Q["✅ 모든 답변이 통과하는<br/>5가지 질문"]
+    A & B & C & D & E & F & G --> Q["✅ 모든 답변이 통과하는<br/>5가지 질문"]
     Q --> O["📄 근거 · 검증 방법<br/>우선순위 · 버린 안"]
     O --> L["📝 feedback/log.md"]
     L -->|"돌려주기만 하면"| FIX["🔁 skill 수정 + 회귀 테스트"]
@@ -166,10 +167,11 @@ python3 scripts/log_to_eval.py feedback/log.md    # 실패 → 회귀 테스트
 ## 📁 구성
 
 ```
-SKILL.md              라우터. 6개 경로, 5가지 질문, 넘지 말아야 할 선
+SKILL.md              라우터. 7개 경로, 5가지 질문, 넘지 말아야 할 선
 references/core/      어포던스, MDA, 인지 부하, 리듬과 공감각
 references/simple/    원터치 메커닉, juice, 절차적 생성, 명작 목록
 references/audio/     Web Audio, Tone.js, 생성형 AI, 플랫폼 함정
+references/web-stack.md  비주얼·오디오 전체 기술을 모바일 / PC로 분류
 workflows/            설계 파이프라인 · 직관성 점검 · 플레이 테스트
 assets/               동작하는 구현: 손맛 보정, 지형 생성, 오디오 엔진, 효과음
 feedback/             개선 루프

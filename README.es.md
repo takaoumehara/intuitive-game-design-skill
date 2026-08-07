@@ -23,7 +23,7 @@ Con los juegos pasa lo mismo. Este skill convierte «se entiende cuando te lo ex
 
 ```mermaid
 flowchart TD
-    U["👤 Lo que preguntas"] --> R{"🧭 Elige 1 de 6 rutas"}
+    U["👤 Lo que preguntas"] --> R{"🧭 Elige 1 de 7 rutas"}
 
     R -->|"Diseñar desde cero"| A["📐 Diseño de mecánicas<br/>7 preguntas → reglas base"]
     R -->|"No se entiende"| B["🔍 Auditoría de intuición<br/>10 puntos → P0/P1/P2"]
@@ -31,8 +31,9 @@ flowchart TD
     R -->|"Hacer una prueba de juego"| D["🧪 CARD / ORID"]
     R -->|"Un toque y sensación"| E["🕹️ Física, juice,<br/>generación infinita"]
     R -->|"Crear el sonido"| F["🔊 Web Audio, Tone.js,<br/>latencia, iOS"]
+    R -->|"¿Con qué lo construyo?"| G["📱 Elección técnica<br/>móvil vs PC"]
 
-    A & B & C & D & E & F --> Q["✅ 5 preguntas que<br/>toda respuesta atraviesa"]
+    A & B & C & D & E & F & G --> Q["✅ 5 preguntas que<br/>toda respuesta atraviesa"]
     Q --> O["📄 Fundamento · Cómo verificar<br/>Prioridad · Qué se descartó"]
     O --> L["📝 feedback/log.md"]
     L -->|"lo devuelves"| FIX["🔁 Corrección + prueba de regresión"]
@@ -166,10 +167,11 @@ La menor variación importa más que el promedio. Algo que solo a veces sale bie
 ## 📁 Qué contiene
 
 ```
-SKILL.md              Enrutador: 6 rutas, 5 preguntas, los límites que no se cruzan
+SKILL.md              Enrutador: 7 rutas, 5 preguntas, los límites que no se cruzan
 references/core/      Affordance, MDA, carga cognitiva, ritmo y sinestesia
 references/simple/    Mecánicas de un toque, juice, generación procedural, clásicos
 references/audio/     Web Audio, Tone.js, IA generativa, trampas de cada plataforma
+references/web-stack.md  Todas las tecnologías visuales y de audio: móvil vs PC
 workflows/            Diseño · Auditoría de intuición · Protocolo de pruebas
 assets/               Código ejecutable: sensación, generador de niveles, audio, efectos
 feedback/             El ciclo de mejora

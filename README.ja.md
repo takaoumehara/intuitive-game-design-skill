@@ -23,7 +23,7 @@
 
 ```mermaid
 flowchart TD
-    U["👤 相談内容"] --> R{"🧭 6経路に振り分け"}
+    U["👤 相談内容"] --> R{"🧭 7経路に振り分け"}
 
     R -->|"新しく設計したい"| A["📐 メカニクス設計<br/>7質問 → コアルール"]
     R -->|"分かりにくいと言われる"| B["🔍 直感性監査<br/>10項目採点 → P0/P1/P2"]
@@ -31,8 +31,9 @@ flowchart TD
     R -->|"プレイテストしたい"| D["🧪 CARD / ORID"]
     R -->|"ワンタップ・手触り"| E["🕹️ 物理・Juice・<br/>無限生成"]
     R -->|"音を鳴らしたい"| F["🔊 Web Audio・Tone.js・<br/>遅延・iOS"]
+    R -->|"何で作ればいい"| G["📱 技術選定<br/>モバイル / PC の分類"]
 
-    A & B & C & D & E & F --> Q["✅ 全ての回答が通る<br/>5つの問い"]
+    A & B & C & D & E & F & G --> Q["✅ 全ての回答が通る<br/>5つの問い"]
     Q --> O["📄 根拠・検証方法<br/>優先度・捨てた案"]
     O --> L["📝 feedback/log.md"]
     L -->|"渡すだけ"| FIX["🔁 スキル修正 + 回帰テスト"]
@@ -166,10 +167,11 @@ python3 scripts/log_to_eval.py feedback/log.md    # 失敗 → 回帰テスト
 ## 📁 中身
 
 ```
-SKILL.md              ルーター。6経路、5つの問い、越えてはいけない線
+SKILL.md              ルーター。7経路、5つの問い、越えてはいけない線
 references/core/      アフォーダンス、MDA、認知負荷、リズムと共感覚
 references/simple/    ワンタップのメカニクス、Juice、無限生成、名作カタログ
 references/audio/     Web Audio、Tone.js、生成AI、プラットフォームの落とし穴
+references/web-stack.md  ビジュアル・音響の全技術。モバイルで動く / PCが要る の分類
 workflows/            設計パイプライン・直感性監査・プレイテスト手順
 assets/               動く実装。手触り補正、地形生成、音響エンジン、効果音集
 feedback/             改善ループ

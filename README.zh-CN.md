@@ -23,7 +23,7 @@
 
 ```mermaid
 flowchart TD
-    U["👤 你的问题"] --> R{"🧭 分流到 6 条路径"}
+    U["👤 你的问题"] --> R{"🧭 分流到 7 条路径"}
 
     R -->|"从零设计"| A["📐 机制设计流程<br/>7 个问题 → 核心规则"]
     R -->|"玩家看不懂"| B["🔍 直觉性审查<br/>10 项评分 → P0/P1/P2"]
@@ -31,8 +31,9 @@ flowchart TD
     R -->|"要做玩家测试"| D["🧪 CARD / ORID"]
     R -->|"一键玩法与手感"| E["🕹️ 物理、Juice、<br/>无限关卡生成"]
     R -->|"要做声音"| F["🔊 Web Audio、Tone.js、<br/>延迟、iOS"]
+    R -->|"该用什么做"| G["📱 技术选型<br/>手机可跑 / 需要 PC"]
 
-    A & B & C & D & E & F --> Q["✅ 每个回答都要过的<br/>5 个问题"]
+    A & B & C & D & E & F & G --> Q["✅ 每个回答都要过的<br/>5 个问题"]
     Q --> O["📄 依据 · 验证方法<br/>优先级 · 被否决的方案"]
     O --> L["📝 feedback/log.md"]
     L -->|"交回来"| FIX["🔁 修改 skill + 回归测试"]
@@ -166,10 +167,11 @@ python3 scripts/log_to_eval.py feedback/log.md    # 失败 → 回归测试
 ## 📁 目录结构
 
 ```
-SKILL.md              路由器。6 条路径、5 个问题、不可越过的红线
+SKILL.md              路由器。7 条路径、5 个问题、不可越过的红线
 references/core/      可供性、MDA、认知负荷、节奏与联觉
 references/simple/    一键玩法机制、Juice、程序化生成、经典作品清单
 references/audio/     Web Audio、Tone.js、生成式 AI、平台坑点
+references/web-stack.md  视觉与音频全部技术，按「手机可跑 / 需要 PC」分类
 workflows/            设计流程 · 直觉性审查 · 玩家测试protocol
 assets/               可运行实现：手感修正、地形生成、音频引擎、音效库
 feedback/             改进闭环

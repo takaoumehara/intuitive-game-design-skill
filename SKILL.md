@@ -1,6 +1,6 @@
 ---
 name: intuitive-game-design
-description: 説明書もチュートリアルもなしで初見のプレイヤーが理解でき、触って気持ちいいゲーム／インタラクティブ体験を、設計から実装まで作る。(1) 直感性の設計と診断 — アフォーダンス、認知負荷理論、MDA、ナチュラルマッピング、密結合、CARD/ORIDプレイテスト。(2) ワンタップの極小ゲーム — 1メカニクスへの絞り込み、可変ジャンプ、コヨーテタイムと入力バッファ、Juice、詰みを出さない無限生成。(3) Webの音の実装 — Web Audio APIでの効果音合成、Tone.jsの動的BGM、リズムゲームの判定と先読みスケジューリング、生成AI連携。ユーザーが「ゲームを作りたい」「操作が分かりにくい」「チュートリアルが長い」「なぜ面白くないのか分からない」「ジャンプの手触りが悪い」「たまに反応しない」「ワンタップのゲーム」「ハイパーカジュアル」「エンドレスランナー」「効果音を作りたい」「BGMをつけたい」「音が鳴らない」「iPhoneだけ無音」「音がずれる」「体を動かすゲーム」「VRの操作」「プレイテストしたい」「無限ステージを自動生成」「難易度カーブ」と言った時は必ずこのスキルを使うこと。英語では game design, playtest, onboarding without tutorial, affordance, game feel, coyote time, one-button game, hypercasual, endless runner, procedural generation, game audio, Web Audio API, Tone.js がトリガー。ゲームと名乗っていなくても、初見の人が説明なしで触る対話型プロダクト（展示、インスタレーション、キオスク）にも適用する。ただし演出・空間体験の企画自体が主題なら interactive-experience-collective を、上達や指導が目的なら movement-learning-system-designer を優先する。
+description: 説明書もチュートリアルもなしで初見のプレイヤーが理解でき、触って気持ちいいゲーム／インタラクティブ体験を、設計から実装まで作る。(1) 直感性の設計と診断 — アフォーダンス、認知負荷理論、MDA、ナチュラルマッピング、密結合、CARD/ORIDプレイテスト。(2) ワンタップの極小ゲーム — 1メカニクスへの絞り込み、可変ジャンプ、コヨーテタイムと入力バッファ、Juice、詰みを出さない無限生成。(3) Webの音の実装 — Web Audio APIでの効果音合成、Tone.jsの動的BGM、リズムゲームの判定と先読みスケジューリング、生成AI連携。ユーザーが「ゲームを作りたい」「操作が分かりにくい」「チュートリアルが長い」「なぜ面白くないのか分からない」「ジャンプの手触りが悪い」「たまに反応しない」「ワンタップのゲーム」「ハイパーカジュアル」「エンドレスランナー」「効果音を作りたい」「BGMをつけたい」「音が鳴らない」「iPhoneだけ無音」「音がずれる」「体を動かすゲーム」「VRの操作」「プレイテストしたい」「無限ステージを自動生成」「難易度カーブ」「何で作ればいい」「スマホでも動く」「重い・発熱する」と言った時は必ずこのスキルを使うこと。英語では game design, playtest, onboarding without tutorial, affordance, game feel, coyote time, one-button game, hypercasual, endless runner, procedural generation, game audio, Web Audio API, Tone.js, Three.js, PixiJS, WebGPU, mobile performance がトリガー。ゲームと名乗っていなくても、初見の人が説明なしで触る対話型プロダクト（展示、インスタレーション、キオスク）にも適用する。ただし演出・空間体験の企画自体が主題なら interactive-experience-collective を、上達や指導が目的なら movement-learning-system-designer を優先する。
 ---
 
 # 直感的ゲームデザイン（設計・手触り・音）
@@ -9,13 +9,16 @@ description: 説明書もチュートリアルもなしで初見のプレイヤ�
 
 このスキルの目的はひとつです。**「説明すれば分かる」を「説明しなくても分かる」に変換すること。** 説明で埋められる穴は、設計で埋められる穴でもあります。テキストやチュートリアルは最後の手段であって、最初の手段ではありません。
 
-扱う範囲は3層あり、どれも同じ目的に奉仕します。
+扱う範囲は4層あり、どれも同じ目的に奉仕します。
 
 | 層 | 問い |
 | :--- | :--- |
 | **設計** | 説明なしで理解できるか |
 | **手触り** | 触って気持ちいいか、もう一回やりたくなるか |
 | **音** | それを実際に鳴らせるか |
+| **技術** | 相手の端末で本当に動くか |
+
+最後の層を軽視しないでください。**PCで作ってPCで確認したものをスマホに出す**——Web体験の失敗のかなりの部分がこれです。どれだけ設計が良くても、発熱してカクついた時点でプレイヤーには届きません（`references/web-stack.md`）。
 
 出力する仕様は思いつきではなく、根拠と**検証方法**をセットで提示してください。根拠のない「直感的です」という主張は、このスキルが最も避けたいものです。
 
@@ -33,6 +36,7 @@ description: 説明書もチュートリアルもなしで初見のプレイヤ�
 | **D. プレイテスト** | 「テストしたい」「結果をどう読む」「被験者に何を聞く」 | `workflows/playtest-card-orid.md` |
 | **E. 極小ゲーム・手触り** | 「ワンタップのゲーム」「ハイパーカジュアル」「ジャンプの手触り」「たまに反応しない」「無限生成」 | `references/simple/` （§4） |
 | **F. 音の実装** | 「効果音を作りたい」「BGM」「音が鳴らない」「音がずれる」「iPhoneだけ無音」 | `references/audio/` （§5） |
+| **G. 技術選定** | 「何で作るのがいい」「Three.jsとPixiJSどっち」「スマホでも動く？」「重い」「発熱する」「WebGPU使える？」 | `references/web-stack.md` |
 
 判断がつかない時は、ユーザーに聞く前にまず **B（診断）** を仮置きしてください。既にあるものを直したい相談のほうが圧倒的に多く、診断を回せば必要な情報も自ずと洗い出せます。
 
@@ -149,6 +153,10 @@ Juice の詰め方 → `references/simple/juice-and-feel.md` ／ 無限生成と
 | 同時発音数 | **16〜32** |
 | タッチターゲット最小 | **44pt**（iOS）/ **48dp**（Android） |
 | 色のみで伝えない | 男性の約**8%**が赤緑の識別に困難 |
+| モバイルの初期ロード | **2MB以下**が安全 |
+| 性能の計測時間 | **3分以上**連続で回す（発熱を出すため） |
+
+モバイル向けの技術選定と予算の詳細は `references/web-stack.md`。**最初の30秒のフレームレートは信用できません** — スマホは発熱すると端末側が性能を落とすため、短時間の計測は実力より良い数字を出します。
 
 ---
 
@@ -206,6 +214,7 @@ Juice の詰め方 → `references/simple/juice-and-feel.md` ／ 無限生成と
 | `references/audio/dynamic-music.md` | Tone.js、動的BGM、遷移 |
 | `references/audio/ai-and-procedural.md` | 生成AI、プロシージャル環境音、キー秘匿とコスト |
 | `references/audio/platform-and-frameworks.md` | 鳴らない・ずれるの診断、iOS、React/Phaser/Three.js |
+| `references/web-stack.md` | 経路G。何で作るかを決める時。ビジュアル・音響の全技術を**モバイルで動く／PCが要る**で分類。発熱、段階的縮退、予算の数値 |
 | `workflows/mechanic-design-pipeline.md` | 経路A。7質問→依存関係スタック→CLT設計→グレーボクシング→4段階検証 |
 | `workflows/intuition-audit.md` | 経路B。10項目20点の採点と優先度付き修正案 |
 | `workflows/playtest-card-orid.md` | 経路D。CARD、ORIDスクリプト、アフォーダンス乖離マップ |
