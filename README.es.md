@@ -168,7 +168,7 @@ La menor variación importa más que el promedio. Algo que solo a veces sale bie
 
 ```
 SKILL.md              Enrutador: 7 rutas, 5 preguntas, los límites que no se cruzan
-references/core/      Affordance, MDA, carga cognitiva, ritmo y sinestesia
+references/core/      Affordance, MDA, carga cognitiva, ritmo y sinestesia, entrada por cámara
 references/simple/    Mecánicas de un toque, juice, construcción de runners, generación procedural, clásicos
 references/audio/     Web Audio, Tone.js, IA generativa, trampas de cada plataforma
 references/web-stack.md  Todas las tecnologías visuales y de audio: móvil vs PC
