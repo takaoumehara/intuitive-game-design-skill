@@ -1,6 +1,6 @@
 ---
 name: intuitive-game-design
-description: 説明書もチュートリアルもなしで初見のプレイヤーが理解でき、触って気持ちいいゲーム／インタラクティブ体験を、設計から実装まで作る。(1) 直感性の設計と診断 — アフォーダンス、認知負荷理論、MDA、ナチュラルマッピング、密結合、CARD/ORIDプレイテスト。(2) ワンタップの極小ゲーム — 1メカニクスへの絞り込み、可変ジャンプ、コヨーテタイムと入力バッファ、Juice、詰みを出さない無限生成。(3) Webの音の実装 — Web Audio APIでの効果音合成、Tone.jsの動的BGM、リズムゲームの判定と先読みスケジューリング、生成AI連携。ユーザーが「ゲームを作りたい」「操作が分かりにくい」「チュートリアルが長い」「なぜ面白くないのか分からない」「ジャンプの手触りが悪い」「たまに反応しない」「ワンタップのゲーム」「ハイパーカジュアル」「エンドレスランナー」「効果音を作りたい」「BGMをつけたい」「音が鳴らない」「iPhoneだけ無音」「音がずれる」「体を動かすゲーム」「顔で操作したい」「カメラで体を読む」「VRの操作」「プレイテストしたい」「無限ステージを自動生成」「難易度カーブ」「何で作ればいい」「スマホでも動く」「重い・発熱する」と言った時は必ずこのスキルを使うこと。英語では game design, playtest, onboarding without tutorial, affordance, game feel, coyote time, one-button game, hypercasual, endless runner, procedural generation, face tracking, MediaPipe, game audio, Web Audio API, Tone.js, Three.js, PixiJS, WebGPU, mobile performance がトリガー。ゲームと名乗っていなくても、初見の人が説明なしで触る対話型プロダクト（展示、インスタレーション、キオスク）にも適用する。ただし演出・空間体験の企画自体が主題なら interactive-experience-collective を、上達や指導が目的なら movement-learning-system-designer を優先する。
+description: 説明書もチュートリアルもなしで初見のプレイヤーが理解でき、触って気持ちいいゲーム／インタラクティブ体験を、設計から実装まで作る。(1) 直感性の設計と診断 — アフォーダンス、認知負荷理論、MDA、ナチュラルマッピング、密結合、CARD/ORIDプレイテスト。(2) ワンタップの極小ゲーム — 1メカニクスへの絞り込み、可変ジャンプ、コヨーテタイムと入力バッファ、Juice、詰みを出さない無限生成。(3) Webの音の実装 — Web Audio APIでの効果音合成、Tone.jsの動的BGM、リズムゲームの判定と先読みスケジューリング、生成AI連携。ユーザーが「ゲームを作りたい」「操作が分かりにくい」「チュートリアルが長い」「なぜ面白くないのか分からない」「ジャンプの手触りが悪い」「たまに反応しない」「ワンタップのゲーム」「ハイパーカジュアル」「エンドレスランナー」「効果音を作りたい」「BGMをつけたい」「音が鳴らない」「iPhoneだけ無音」「音がずれる」「体を動かすゲーム」「顔で操作したい」「カメラで体を読む」「VRの操作」「プレイテストしたい」「無限ステージを自動生成」「難易度カーブ」「モニュメントバレーみたいな」「何で作ればいい」「スマホでも動く」「重い・発熱する」と言った時は必ずこのスキルを使うこと。英語では game design, playtest, onboarding without tutorial, affordance, game feel, coyote time, one-button game, hypercasual, endless runner, procedural generation, face tracking, MediaPipe, game audio, Web Audio API, Tone.js, Three.js, PixiJS, WebGPU, mobile performance がトリガー。ゲームと名乗っていなくても、初見の人が説明なしで触る対話型プロダクト（展示、インスタレーション、キオスク）にも適用する。ただし演出・空間体験の企画自体が主題なら interactive-experience-collective を、上達や指導が目的なら movement-learning-system-designer を優先する。
 ---
 
 # 直感的ゲームデザイン（設計・手触り・音）
@@ -38,6 +38,7 @@ description: 説明書もチュートリアルもなしで初見のプレイヤ�
 | **F. 音の実装** | 「効果音を作りたい」「BGM」「音が鳴らない」「音がずれる」「iPhoneだけ無音」 | `references/audio/` （§5） |
 | **G. 技術選定** | 「何で作るのがいい」「Three.jsとPixiJSどっち」「スマホでも動く？」「重い」「発熱する」「WebGPU使える？」 | `references/web-stack.md` |
 | **H. 入力の設計（タップ以外）** | 「顔で操作したい」「カメラで体を読む」「MediaPipe」「手をかざして」「その場でジャンプ」「認識が不安定」「タップ版も作りたい」 | `references/core/input-layer.md` → `references/core/camera-input.md` |
+| **I. 静かで美しい体験** | 「モニュメントバレーみたいな」「不可能な建築」「錯視のパズル」「失敗のないゲーム」「綺麗なのに軽くしたい」「アート寄りの作品」 | `references/core/calm-experience.md` ／ `references/core/projection-as-rule.md` ／ `references/art-pipeline.md` |
 
 判断がつかない時は、ユーザーに聞く前にまず **B（診断）** を仮置きしてください。既にあるものを直したい相談のほうが圧倒的に多く、診断を回せば必要な情報も自ずと洗い出せます。
 
@@ -162,6 +163,9 @@ Juice の詰め方 → `references/simple/juice-and-feel.md` ／ 無限生成と
 | カメラ入力の総遅延 | **80〜150ms**（周期＋推定＋フィルタ。消せない） |
 | 全身動作の身体慣性 | **＋300〜800ms**（カメラの遅延に上乗せ） |
 | 体を使う入力の1プレイ | **60〜120秒**（全身なら60〜90秒） |
+| 「分からない」を許容できる長さ | **20〜60秒**（2分超で離脱） |
+| 使い捨て構成の章数 | **10〜12章**（縮めるなら5〜7、密度は下げない） |
+| 1画面の色数 | **4〜6色**（彩度の高い色は操作できるものに1つだけ） |
 | しきい値のヒステリシス差 | 正規化値で **0.2 程度**（差ゼロは必ずチャタリングする） |
 | 身体を使う操作の休息 | 総プレイ時間の **20〜25%** |
 | Look-ahead | **2拍前＝最小800〜1200ms** |
@@ -230,6 +234,9 @@ Juice の詰め方 → `references/simple/juice-and-feel.md` ／ 無限生成と
 | `references/core/genre-patterns.md` | ジャンル別の実装パターン（経路C）。奥行き方向に迫ってくる構成（Z軸）を含む |
 | `references/core/input-layer.md` | 経路H。タップ・口・手・足・全身を同じ信号として扱う。モダリティ比較表、移し替える時の5数値、タップ先行の原則 |
 | `references/core/camera-input.md` | 経路H。カメラ固有の実装。正規化、ヒステリシス、One Euro、遅延予算、無言キャリブレーション、入力の可視化、疲労、プライバシー |
+| `references/core/calm-experience.md` | 経路I。失敗のない短い体験の設計。緊張の代替供給源、1画面完結、アルバム構成、短さの引き受け方、予算が1/10の時 |
+| `references/core/projection-as-rule.md` | 経路I。不可能幾何。スクリーン空間の接続、固定カメラの損得、テレポート実装、角度への脆さの自動検証、拡張4方向 |
+| `references/art-pipeline.md` | 経路I。美しさと軽さを同時に取る。固定カメラ＝ベイク、AO、テクスチャを持たない設計、色の絞り方、予算と縮退 |
 | `references/core/case-studies-and-metrics.md` | 主張に実証データを添える時。数値と失敗事例 |
 | `references/core/rhythm-and-synesthesia.md` | 音・リズム・光・振動・身体運動の設計。共感覚、Exergame 7指針 |
 | `references/simple/mechanics-and-physics.md` | 5メカニクスの物理実装と数式 |
