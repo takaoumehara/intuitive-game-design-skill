@@ -167,11 +167,12 @@ The lower variance matters more than the average. A skill that scores well only 
 ## 📁 What's inside
 
 ```
-SKILL.md              Router — 7 paths, 5 questions, the lines not to cross
-references/core/      Affordance, MDA, cognitive load, rhythm & synesthesia, the input layer & camera input
+SKILL.md              Router — 9 paths, 5 questions, the lines not to cross
+references/core/      Affordance, MDA, cognitive load, rhythm & synesthesia, input layer, camera input, impossible geometry, calm experiences
 references/simple/    One-tap mechanics, juice, the runner build, procedural generation, a canon of hits
 references/audio/     Web Audio, Tone.js, generative AI, platform pitfalls
-references/web-stack.md  Every web visual + audio tech, split by mobile-safe vs PC-only
+references/web-stack.md    Every web visual + audio tech, split by mobile-safe vs PC-only
+references/art-pipeline.md Beauty and lightness at the same time
 workflows/            Design pipeline · Intuition audit · Playtest protocol
 assets/               Runnable: juice controller, chunk generator, audio engine, SFX library
 feedback/             The improvement loop

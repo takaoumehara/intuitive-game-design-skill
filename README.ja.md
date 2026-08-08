@@ -167,11 +167,12 @@ python3 scripts/log_to_eval.py feedback/log.md    # 失敗 → 回帰テスト
 ## 📁 中身
 
 ```
-SKILL.md              ルーター。7経路、5つの問い、越えてはいけない線
-references/core/      アフォーダンス、MDA、認知負荷、リズムと共感覚、入力の抽象化とカメラ入力
+SKILL.md              ルーター。9経路、5つの問い、越えてはいけない線
+references/core/      アフォーダンス、MDA、認知負荷、リズムと共感覚、入力の抽象化、カメラ入力、不可能幾何、静かな体験
 references/simple/    ワンタップのメカニクス、Juice、ランナーの組み立て、無限生成、名作カタログ
 references/audio/     Web Audio、Tone.js、生成AI、プラットフォームの落とし穴
-references/web-stack.md  ビジュアル・音響の全技術。モバイルで動く / PCが要る の分類
+references/web-stack.md    ビジュアル・音響の全技術。モバイルで動く / PCが要る の分類
+references/art-pipeline.md 美しさと軽さを同時に取る美術パイプライン
 workflows/            設計パイプライン・直感性監査・プレイテスト手順
 assets/               動く実装。手触り補正、地形生成、音響エンジン、効果音集
 feedback/             改善ループ
