@@ -168,7 +168,7 @@ python3 scripts/log_to_eval.py feedback/log.md    # 失败 → 回归测试
 
 ```
 SKILL.md              路由器。7 条路径、5 个问题、不可越过的红线
-references/core/      可供性、MDA、认知负荷、节奏与联觉
+references/core/      可供性、MDA、认知负荷、节奏与联觉、输入抽象层与摄像头输入
 references/simple/    一键玩法机制、Juice、跑酷游戏的搭建、程序化生成、经典作品清单
 references/audio/     Web Audio、Tone.js、生成式 AI、平台坑点
 references/web-stack.md  视觉与音频全部技术，按「手机可跑 / 需要 PC」分类

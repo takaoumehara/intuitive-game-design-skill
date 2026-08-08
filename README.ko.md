@@ -168,7 +168,7 @@ python3 scripts/log_to_eval.py feedback/log.md    # 실패 → 회귀 테스트
 
 ```
 SKILL.md              라우터. 7개 경로, 5가지 질문, 넘지 말아야 할 선
-references/core/      어포던스, MDA, 인지 부하, 리듬과 공감각
+references/core/      어포던스, MDA, 인지 부하, 리듬과 공감각, 입력 추상화와 카메라 입력
 references/simple/    원터치 메커닉, juice, 러너 조립, 절차적 생성, 명작 목록
 references/audio/     Web Audio, Tone.js, 생성형 AI, 플랫폼 함정
 references/web-stack.md  비주얼·오디오 전체 기술을 모바일 / PC로 분류
