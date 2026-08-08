@@ -34,7 +34,7 @@ description: 説明書もチュートリアルもなしで初見のプレイヤ�
 | **B. 診断・改善** | 「操作が分かりにくい」「チュートリアルが長い」「離脱される」「なぜつまらないのか」 | `workflows/intuition-audit.md` |
 | **C. ジャンル別の具体化** | 「音ゲーのUIどうする」「VRの掴む操作」「このジャンルの定石は」 | `references/core/genre-patterns.md` |
 | **D. プレイテスト** | 「テストしたい」「結果をどう読む」「被験者に何を聞く」 | `workflows/playtest-card-orid.md` |
-| **E. 極小ゲーム・手触り** | 「ワンタップのゲーム」「ハイパーカジュアル」「ジャンプの手触り」「たまに反応しない」「無限生成」 | `references/simple/` （§4） |
+| **E. 極小ゲーム・手触り** | 「ワンタップのゲーム」「ハイパーカジュアル」「エンドレスランナー」「ジャンプの手触り」「たまに反応しない」「無限生成」 | `references/simple/` （§4） |
 | **F. 音の実装** | 「効果音を作りたい」「BGM」「音が鳴らない」「音がずれる」「iPhoneだけ無音」 | `references/audio/` （§5） |
 | **G. 技術選定** | 「何で作るのがいい」「Three.jsとPixiJSどっち」「スマホでも動く？」「重い」「発熱する」「WebGPU使える？」 | `references/web-stack.md` |
 
@@ -97,6 +97,10 @@ description: 説明書もチュートリアルもなしで初見のプレイヤ�
 ### 4.1 メカニクスは1作品に1つだけ
 **2つ入れた時点でこのジャンルの強みは消えます。** 「タップでジャンプ、長押しでダッシュ」にした瞬間、1秒でルールが分かる条件が壊れます。追加したくなったら問い4に戻ってください。
 
+**ただし「文脈で意味が変わる」のは別物です。** 接地中はジャンプ、壁際は壁蹴り、空中は回転——これは操作を増やしているのではなく、プレイヤーが立っている場所を増やしています。成立条件はひとつだけで、**分岐の根拠が押す前に画面で見えていること**。見えない内部状態（コンボ数、経過時間）で意味を変えると、「たまに変な動きをする」というバグ報告になって返ってきます。
+
+これは免罪符ではありません。**足すのは1つずつ、可変ジャンプだけで面白くなってから。** そして押し方（長押し・ダブルタップ）に別の動作を割り当てるのは文脈ではなく操作の追加です。特に長押しは可変ジャンプが既に使っているので、そこにダッシュを乗せると意味が衝突します。
+
 Tap&Jump ／ Hold&Release ／ Pull&Release ／ Drop&Merge ／ Timing Stop の5分類と物理実装 → `references/simple/mechanics-and-physics.md`
 
 ### 4.2 「もう一回」を生む3原則
@@ -109,7 +113,12 @@ Tap&Jump ／ Hold&Release ／ Pull&Release ／ Drop&Merge ／ Timing Stop の5�
 
 検証済みの実装が `assets/juice-controller.js` にあります。**それを読んで、必要な部分を回答の中に展開してください**（§7の鉄則1）。ゼロから書き直すと、コヨーテタイムと入力バッファの消費順序を誤って二重発動やすり抜けが起きます — 発動時に**両方のタイマーを同時に消費する**のが要点です。
 
-Juice の詰め方 → `references/simple/juice-and-feel.md` ／ 無限生成と詰み回避 → `references/simple/procedural-generation.md`（実装 `assets/chunk-generator.js`）／ 名作カタログ → `references/simple/canon.md`
+### 4.4 「自動で進み、タップで跳ぶ」なら、成功を何で返すかを先に決める
+このジャンルの相談の大半はランナーです。**「タップでジャンプするゲーム」は企画になっていません。** 名作が違うのは操作ではなく、成功が何として返ってくるか——速度（Canabalt）、音楽の継続（BIT.TRIP RUNNER）、リスクを取った見返り（Alto）、地形が別物になること（SUPER MARIO RUN）——の選択です。
+
+特に**速度で返す**設計は、報酬と難易度を同時に担うので難易度カーブが自動で手に入りますが、代償があります。**速度を上げたら、同じだけ「見えてから対応するまでの猶予」を確保し直さなければなりません。** 後半が理不尽になるランナーは、難易度設計ではなくカメラの問題です。
+
+Juice の詰め方 → `references/simple/juice-and-feel.md` ／ 無限生成と詰み回避 → `references/simple/procedural-generation.md`（実装 `assets/chunk-generator.js`）／ ランナーの組み立て → `references/simple/one-button-runner.md` ／ 名作カタログ → `references/simple/canon.md`
 
 ---
 
@@ -148,7 +157,11 @@ Juice の詰め方 → `references/simple/juice-and-feel.md` ／ 無限生成と
 | 身体慣性 | **300〜800ms** |
 | 出力機器のレイテンシ | **50〜200ms**（Bluetooth・液晶） |
 | 音ズレの検知 | 遅れ約100ms超／**先行は約45ms超**（2倍以上厳しい） |
+| 見えてから対応するまでの猶予 | 最低 **400ms** ／ 快適 **600〜800ms** |
+| 速度連動FOVの上げ幅 | **+10〜15°**（時定数0.3〜0.5秒で補間） |
 | 死亡→再開 | **0.5秒以内・1タップ** |
+| 死亡後に戻す速度 | 直前速度の **60〜75%** から調整 |
+| 触覚の3段階 | Light **10ms** / Medium **20〜30ms** / Heavy **40〜60ms** |
 | 効果音の長さ | UI **30〜60ms** / SE **80〜300ms** |
 | 同時発音数 | **16〜32** |
 | タッチターゲット最小 | **44pt**（iOS）/ **48dp**（Android） |
@@ -207,8 +220,9 @@ Juice の詰め方 → `references/simple/juice-and-feel.md` ／ 無限生成と
 | `references/core/case-studies-and-metrics.md` | 主張に実証データを添える時。数値と失敗事例 |
 | `references/core/rhythm-and-synesthesia.md` | 音・リズム・光・振動・身体運動の設計。共感覚、Exergame 7指針 |
 | `references/simple/mechanics-and-physics.md` | 5メカニクスの物理実装と数式 |
-| `references/simple/juice-and-feel.md` | シェイク、ヒットストップ、リトライループ |
-| `references/simple/procedural-generation.md` | 無限生成と難易度カーブ、詰み回避 |
+| `references/simple/juice-and-feel.md` | シェイク、ヒットストップ、触覚（Webの制約つき）、リトライループ |
+| `references/simple/procedural-generation.md` | 無限生成と難易度カーブ、詰み回避、縦の分岐 |
+| `references/simple/one-button-runner.md` | 自動前進＋タップのランナー。文脈による多義化、速度と報酬、カメラとFOV、予兆、3Dの速度表現 |
 | `references/simple/canon.md` | 名作カタログ（1972〜2023）。企画の参照点 |
 | `references/audio/web-audio-patterns.md` | 素の Web Audio で音を作る |
 | `references/audio/dynamic-music.md` | Tone.js、動的BGM、遷移 |
