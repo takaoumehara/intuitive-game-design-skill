@@ -129,6 +129,19 @@ node --check assets/juice-controller.js     # 同梱実装の構文チェック
 python3 scripts/log_summary.py feedback/log.md   # フィードバック用スクリプトの動作確認
 ```
 
+### 💎 パターンE — Google Gem（Gemini）
+
+Gem はナレッジに添付できる本数が少なく、**20個のリファレンスをそのまま入れられません。** 中身を変えずに数ファイルへ畳んだものが [`dist/gem/`](dist/gem/) にあります。
+
+1. `dist/gem/instructions.md` の中身を、Gem の**手順（Instructions）**欄に貼る
+2. `dist/gem/split/` の**7ファイル**をナレッジにアップロードする
+
+本数の上限に引っかかる場合は、代わりに `dist/gem/single/` の1ファイルだけを入れてください（内容は同じです）。手順欄に入りきらない場合は `instructions-short.md` に差し替えます。詳しい手順と動作確認は [`gem/SETUP.md`](gem/SETUP.md)。
+
+```bash
+python3 scripts/build_gem.py   # 本体を編集したら作り直す
+```
+
 ### 🔁 使いながら育てる
 
 作業の終わりに、スキルが `feedback/log.md` へ7行を追記します。何件か溜まったら、そのファイルを渡してください。
@@ -176,7 +189,8 @@ references/art-pipeline.md 美しさと軽さを同時に取る美術パイプ�
 workflows/            設計パイプライン・直感性監査・プレイテスト手順
 assets/               動く実装。手触り補正、地形生成、音響エンジン、効果音集
 feedback/             改善ループ
-scripts/              ログ → 回帰テスト。package.py が claude.ai用zipを再生成
+scripts/              ログ → 回帰テスト。package.py が zip、build_gem.py が Gem用を再生成
+gem/                  Google Gem の手順文（build_gem.py が dist/gem/ へ書き出す）
 dist/                 claude.ai用のビルド済みzip（設定 → Skills）
 ```
 

@@ -129,6 +129,19 @@ node --check assets/juice-controller.js     # 내장 구현의 문법 확인
 python3 scripts/log_summary.py feedback/log.md   # 피드백 도구 동작 확인
 ```
 
+### 💎 패턴 E — Google Gem (Gemini)
+
+Gem은 지식 파일을 몇 개밖에 첨부할 수 없어 **참고 문서 20여 개를 그대로 올릴 수 없습니다.** [`dist/gem/`](dist/gem/)에 같은 내용을 몇 개 파일로 접어 둔 것이 있습니다.
+
+1. `dist/gem/instructions.md`의 내용을 Gem의 **지침(Instructions)** 칸에 붙여넣기
+2. `dist/gem/split/`의 **7개 파일**을 지식으로 업로드
+
+개수 제한에 걸리면 `dist/gem/single/`의 파일 하나만 올리세요(내용 동일). 지침 칸이 부족하면 `instructions-short.md`로 교체합니다. 자세한 절차: [`gem/SETUP.md`](gem/SETUP.md).
+
+```bash
+python3 scripts/build_gem.py   # skill을 수정하면 다시 생성
+```
+
 ### 🔁 쓰면서 개선하기
 
 작업이 끝나면 skill이 `feedback/log.md`에 7줄을 덧붙입니다. 몇 건 쌓이면 그 파일을 돌려주세요.

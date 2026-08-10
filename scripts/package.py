@@ -8,8 +8,9 @@ silently fails to trigger after upload:
   2. The archive's only top-level entry must be a folder matching SKILL.md's
      `name:` field, with SKILL.md directly inside it.
 
-`evals/` (grading data, not part of the skill's runtime) and `dist/` itself
-are excluded so the archive never ends up containing itself.
+`evals/` (grading data), `gem/` (the Google Gem export's source text) and
+`dist/` itself are excluded — the first two are not part of the skill's
+runtime, and excluding `dist/` keeps the archive from containing itself.
 
 Usage:
     python3 scripts/package.py
@@ -35,7 +36,10 @@ def tracked_files():
     out = subprocess.run(
         ["git", "ls-files"], cwd=ROOT, capture_output=True, text=True, check=True
     ).stdout.splitlines()
-    return [f for f in out if not f.startswith(("evals/", "dist/")) and f != ".gitignore"]
+    # `gem/` は Google Gem 用の書き出し元（SKILL.md の凝縮版）。同梱すると
+    # スキル内に指示文が二重に存在することになり、読む側が混乱する。
+    return [f for f in out
+            if not f.startswith(("evals/", "dist/", "gem/")) and f != ".gitignore"]
 
 
 def main():
