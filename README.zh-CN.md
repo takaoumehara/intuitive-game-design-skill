@@ -129,6 +129,19 @@ node --check assets/juice-controller.js     # 检查内置实现的语法
 python3 scripts/log_summary.py feedback/log.md   # 确认反馈脚本可运行
 ```
 
+### 💎 方式 E —— Google Gem（Gemini）
+
+Gem 能附加的知识文件数量很少，**20 多个参考文档无法直接上传。** [`dist/gem/`](dist/gem/) 里放着内容相同、但折叠成少数几个文件的版本。
+
+1. 把 `dist/gem/instructions.md` 的内容粘贴到 Gem 的**说明（Instructions）**栏
+2. 把 `dist/gem/split/` 下的 **7 个文件**作为知识上传
+
+若文件数仍超限，改为只上传 `dist/gem/single/` 中的单个文件（内容一致）。若说明栏放不下，换成 `instructions-short.md`。完整步骤见 [`gem/SETUP.md`](gem/SETUP.md)。
+
+```bash
+python3 scripts/build_gem.py   # 修改 skill 后重新生成
+```
+
 ### 🔁 边用边改进
 
 每次用完，skill 会往 `feedback/log.md` 追加 7 行。攒几条之后，把文件交回来：

@@ -129,6 +129,19 @@ node --check assets/juice-controller.js     # sintaxis de las implementaciones i
 python3 scripts/log_summary.py feedback/log.md   # las herramientas de feedback se ejecutan
 ```
 
+### 💎 Patrón E — Google Gem (Gemini)
+
+Un Gem admite pocos archivos de conocimiento, así que **las ~20 referencias no se pueden subir tal cual.** [`dist/gem/`](dist/gem/) contiene el mismo material plegado en unos pocos archivos.
+
+1. Pega `dist/gem/instructions.md` en el campo **Instrucciones** del Gem
+2. Sube los **7 archivos** de `dist/gem/split/` como conocimiento
+
+Si el límite es menor, sube el único archivo de `dist/gem/single/` (contenido idéntico). Si el campo de instrucciones se queda corto, usa `instructions-short.md`. Pasos completos: [`gem/SETUP.md`](gem/SETUP.md).
+
+```bash
+python3 scripts/build_gem.py   # reconstruir tras editar el skill
+```
+
 ### 🔁 Mejorarlo mientras lo usas
 
 Al terminar, el skill añade siete líneas a `feedback/log.md`. Cuando tengas varias entradas, devuelve el archivo:

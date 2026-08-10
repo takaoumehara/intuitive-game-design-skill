@@ -129,6 +129,19 @@ node --check assets/juice-controller.js     # bundled implementations parse
 python3 scripts/log_summary.py feedback/log.md   # feedback tooling runs
 ```
 
+### 💎 Pattern E — Google Gem (Gemini)
+
+A Gem accepts only a handful of knowledge files, so **the ~20 references cannot be uploaded as they are.** [`dist/gem/`](dist/gem/) holds the same content folded into a few files.
+
+1. Paste `dist/gem/instructions.md` into the Gem's **Instructions** box
+2. Upload the **7 files** in `dist/gem/split/` as knowledge
+
+If the file limit is lower, upload the single file in `dist/gem/single/` instead — identical content. If the instructions box is too small, use `instructions-short.md`. Full steps and a smoke test: [`gem/SETUP.md`](gem/SETUP.md).
+
+```bash
+python3 scripts/build_gem.py   # rebuild after editing the skill
+```
+
 ### 🔁 Improving it as you use it
 
 At the end of a session the skill appends seven lines to `feedback/log.md`. When you have a few entries, hand the file back:
@@ -176,7 +189,8 @@ references/art-pipeline.md Beauty and lightness at the same time
 workflows/            Design pipeline · Intuition audit · Playtest protocol
 assets/               Runnable: juice controller, chunk generator, audio engine, SFX library
 feedback/             The improvement loop
-scripts/              Log → regression test · package.py rebuilds the claude.ai zip
+scripts/              Log → regression test · package.py rebuilds the zip, build_gem.py the Gem export
+gem/                  Instruction text for the Google Gem (build_gem.py writes dist/gem/)
 dist/                 Pre-built .zip for claude.ai (Settings → Skills)
 ```
 
