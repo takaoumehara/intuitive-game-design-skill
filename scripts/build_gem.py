@@ -36,9 +36,10 @@ BUNDLES = [
     ("01-router-and-principles.md", "ルーターと原則（本体）", [
         "SKILL.md",
     ]),
-    ("02-core-theory.md", "理論・ジャンル別パターン・実証データ", [
+    ("02-core-theory.md", "理論・ジャンル別パターン・複数人・実証データ", [
         "references/core/theory.md",
         "references/core/genre-patterns.md",
+        "references/core/multiplayer-sync.md",
         "references/core/case-studies-and-metrics.md",
     ]),
     ("03-feel-and-simple.md", "極小ゲームの物理・手触り・生成", [
