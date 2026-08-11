@@ -23,7 +23,7 @@ Con los juegos pasa lo mismo. Este skill convierte «se entiende cuando te lo ex
 
 ```mermaid
 flowchart TD
-    U["👤 Lo que preguntas"] --> R{"🧭 Elige 1 de 7 rutas"}
+    U["👤 Lo que preguntas"] --> R{"🧭 Elige 1 de 10 rutas"}
 
     R -->|"Diseñar desde cero"| A["📐 Diseño de mecánicas<br/>7 preguntas → reglas base"]
     R -->|"No se entiende"| B["🔍 Auditoría de intuición<br/>10 puntos → P0/P1/P2"]
@@ -32,8 +32,11 @@ flowchart TD
     R -->|"Un toque y sensación"| E["🕹️ Física, juice,<br/>generación infinita"]
     R -->|"Crear el sonido"| F["🔊 Web Audio, Tone.js,<br/>latencia, iOS"]
     R -->|"¿Con qué lo construyo?"| G["📱 Elección técnica<br/>móvil vs PC"]
+    R -->|"controlar con la cara o el cuerpo"| H["🎥 Capa de entrada<br/>cámara"]
+    R -->|"algo sereno y bello"| I["🏛️ Experiencia serena<br/>geometría imposible · arte"]
+    R -->|"jugar con otras personas"| J["👥 Presencial y<br/>sincronización en red"]
 
-    A & B & C & D & E & F & G --> Q["✅ 5 preguntas que<br/>toda respuesta atraviesa"]
+    A & B & C & D & E & F & G & H & I & J --> Q["✅ 5 preguntas que<br/>toda respuesta atraviesa"]
     Q --> O["📄 Fundamento · Cómo verificar<br/>Prioridad · Qué se descartó"]
     O --> L["📝 feedback/log.md"]
     L -->|"lo devuelves"| FIX["🔁 Corrección + prueba de regresión"]
@@ -180,8 +183,8 @@ La menor variación importa más que el promedio. Algo que solo a veces sale bie
 ## 📁 Qué contiene
 
 ```
-SKILL.md              Enrutador: 9 rutas, 5 preguntas, los límites que no se cruzan
-references/core/      Affordance, MDA, carga cognitiva, ritmo y sinestesia, capa de entrada, cámara, geometría imposible, experiencias serenas
+SKILL.md              Enrutador: 10 rutas, 5 preguntas, los límites que no se cruzan
+references/core/      Affordance, MDA, carga cognitiva, ritmo y sinestesia, capa de entrada, cámara, geometría imposible, experiencias serenas, jugar en compañía
 references/simple/    Mecánicas de un toque, juice, construcción de runners, generación procedural, clásicos
 references/audio/     Web Audio, Tone.js, IA generativa, trampas de cada plataforma
 references/web-stack.md    Todas las tecnologías visuales y de audio: móvil vs PC

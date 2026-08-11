@@ -1,6 +1,6 @@
 ---
 name: intuitive-game-design
-description: 説明書もチュートリアルもなしで初見のプレイヤーが理解でき、触って気持ちいいゲーム／インタラクティブ体験を、設計から実装まで作る。(1) 直感性の設計と診断 — アフォーダンス、認知負荷理論、MDA、ナチュラルマッピング、密結合、CARD/ORIDプレイテスト。(2) ワンタップの極小ゲーム — 1メカニクスへの絞り込み、可変ジャンプ、コヨーテタイムと入力バッファ、Juice、詰みを出さない無限生成。(3) Webの音の実装 — Web Audio APIでの効果音合成、Tone.jsの動的BGM、リズムゲームの判定と先読みスケジューリング、生成AI連携。ユーザーが「ゲームを作りたい」「操作が分かりにくい」「チュートリアルが長い」「なぜ面白くないのか分からない」「ジャンプの手触りが悪い」「たまに反応しない」「ワンタップのゲーム」「ハイパーカジュアル」「エンドレスランナー」「効果音を作りたい」「BGMをつけたい」「音が鳴らない」「iPhoneだけ無音」「音がずれる」「体を動かすゲーム」「顔で操作したい」「カメラで体を読む」「VRの操作」「プレイテストしたい」「無限ステージを自動生成」「難易度カーブ」「モニュメントバレーみたいな」「何で作ればいい」「スマホでも動く」「重い・発熱する」と言った時は必ずこのスキルを使うこと。英語では game design, playtest, onboarding without tutorial, affordance, game feel, coyote time, one-button game, hypercasual, endless runner, procedural generation, face tracking, MediaPipe, game audio, Web Audio API, Tone.js, Three.js, PixiJS, WebGPU, mobile performance がトリガー。ゲームと名乗っていなくても、初見の人が説明なしで触る対話型プロダクト（展示、インスタレーション、キオスク）にも適用する。ただし演出・空間体験の企画自体が主題なら interactive-experience-collective を、上達や指導が目的なら movement-learning-system-designer を優先する。
+description: 説明書もチュートリアルもなしで初見のプレイヤーが理解でき、触って気持ちいいゲーム／インタラクティブ体験を、設計から実装まで作る。(1) 直感性の設計と診断 — アフォーダンス、認知負荷理論、MDA、ナチュラルマッピング、密結合、CARD/ORIDプレイテスト。(2) ワンタップの極小ゲーム — 1メカニクスへの絞り込み、可変ジャンプ、コヨーテタイムと入力バッファ、Juice、詰みを出さない無限生成。(3) Webの音の実装 — Web Audio APIでの効果音合成、Tone.jsの動的BGM、リズムゲームの判定と先読みスケジューリング、生成AI連携。ユーザーが「ゲームを作りたい」「操作が分かりにくい」「チュートリアルが長い」「なぜ面白くないのか分からない」「ジャンプの手触りが悪い」「たまに反応しない」「ワンタップのゲーム」「ハイパーカジュアル」「エンドレスランナー」「効果音を作りたい」「BGMをつけたい」「音が鳴らない」「iPhoneだけ無音」「音がずれる」「体を動かすゲーム」「顔で操作したい」「カメラで体を読む」「プレイテストしたい」「無限ステージを自動生成」「モニュメントバレーみたいな」「何で作ればいい」「スマホでも動く」「2人で遊びたい」「オンライン対戦」「同期がずれる」と言った時は必ずこのスキルを使うこと。英語では game design, playtest, onboarding without tutorial, affordance, game feel, coyote time, one-button game, hypercasual, endless runner, procedural generation, face tracking, MediaPipe, game audio, Web Audio API, Tone.js, Three.js, WebGPU, mobile performance, multiplayer, WebRTC がトリガー。ゲームと名乗っていなくても、初見の人が説明なしで触る対話型プロダクト（展示、インスタレーション、キオスク）にも適用する。ただし演出・空間体験の企画自体が主題なら interactive-experience-collective を、上達や指導が目的なら movement-learning-system-designer を優先する。
 ---
 
 # 直感的ゲームデザイン（設計・手触り・音）
@@ -39,6 +39,7 @@ description: 説明書もチュートリアルもなしで初見のプレイヤ�
 | **G. 技術選定** | 「何で作るのがいい」「Three.jsとPixiJSどっち」「スマホでも動く？」「重い」「発熱する」「WebGPU使える？」 | `references/web-stack.md` |
 | **H. 入力の設計（タップ以外）** | 「顔で操作したい」「カメラで体を読む」「MediaPipe」「手をかざして」「その場でジャンプ」「認識が不安定」「タップ版も作りたい」 | `references/core/input-layer.md` → `references/core/camera-input.md` |
 | **I. 静かで美しい体験** | 「モニュメントバレーみたいな」「不可能な建築」「錯視のパズル」「失敗のないゲーム」「綺麗なのに軽くしたい」「アート寄りの作品」 | `references/core/calm-experience.md` ／ `references/core/projection-as-rule.md` ／ `references/art-pipeline.md` |
+| **J. 複数人で遊ぶ** | 「2人で遊べるように」「友達と一緒に」「オンライン対戦」「同期」「相手がどこにいるか見えるように」「同じ画面で複数人」 | `references/core/multiplayer-sync.md` |
 
 判断がつかない時は、ユーザーに聞く前にまず **B（診断）** を仮置きしてください。既にあるものを直したい相談のほうが圧倒的に多く、診断を回せば必要な情報も自ずと洗い出せます。
 
@@ -85,6 +86,7 @@ description: 説明書もチュートリアルもなしで初見のプレイヤ�
 - **面白くないグレーボックスにアートや音を足さない。** 見た目と音は面白さの判断を狂わせます（ハロー効果）
 - **「直感的」と根拠なく書かない。** 直感は万人共通ではなく、特定の集団の既存スキーマへの依存です。**誰にとって**直感的かを名指してください
 - **プレイテスト中に説明しない。** 助けた瞬間にデータが消えます。沈黙は手順です
+- **複数人にする時、先に脱落した人の時間を設計せずに出さない。** 待たされている人は、不満を言う前に閉じます。脱落を作らないか、1プレイを短くするか、観戦に役割を与えるかを先に決めてください（`references/core/multiplayer-sync.md` §2）
 - **カメラ映像を、本人の明示的な操作なしに保存・送信しない。** 共有機能のために裏でフレームを溜めておく設計は、実際に共有しなくても信頼を壊します。推論がローカル完結なら、そう明示するほうが許可率が上がります
 - **修正提案には必ず優先度（P0/P1/P2）を付ける。** 優先度なしで10個並べると、受け取った人は全部やろうとして何も終わりません。良い指摘を10個出して1個も実装されないより、P0を2個名指すほうが実際にゲームは良くなります
   - **P0**: 信頼が壊れる／離脱に直結／身体的に危険（偽アフォーダンス、無反応な入力、予告なしの即死、初手の不在、UFD）
@@ -175,7 +177,12 @@ Juice の詰め方 → `references/simple/juice-and-feel.md` ／ 無限生成と
 | 見えてから対応するまでの猶予 | 最低 **400ms** ／ 快適 **600〜800ms** |
 | 速度連動FOVの上げ幅 | **+10〜15°**（時定数0.3〜0.5秒で補間） |
 | 死亡→再開 | **0.5秒以内・1タップ** |
+| 巻き戻して復帰する場合の合計 | **1.5秒以内**（各段0.3〜0.5秒。戻す先は「最後に接地した安全地点」） |
 | 死亡後に戻す速度 | 直前速度の **60〜75%** から調整 |
+| 複数人の「同時入力」とみなす窓 | **300〜500ms**（指の感覚で作ると成立しない） |
+| 同期：世界のスナップショット | **15〜20Hz** ／ 位置・入力 **20〜30Hz** |
+| 同期：他人を描く遅延（補間バッファ） | **100ms 前後**（自分の入力は絶対に往復を待たせない） |
+| P2P直結の往復 | **20〜80ms**（同一国内）。3人以上は直結では繋がらない |
 | 触覚の3段階 | Light **10ms** / Medium **20〜30ms** / Heavy **40〜60ms** |
 | 効果音の長さ | UI **30〜60ms** / SE **80〜300ms** |
 | 同時発音数 | **16〜32** |
@@ -234,15 +241,16 @@ Juice の詰め方 → `references/simple/juice-and-feel.md` ／ 無限生成と
 | `references/core/genre-patterns.md` | ジャンル別の実装パターン（経路C）。奥行き方向に迫ってくる構成（Z軸）を含む |
 | `references/core/input-layer.md` | 経路H。タップ・口・手・足・全身を同じ信号として扱う。モダリティ比較表、移し替える時の5数値、タップ先行の原則 |
 | `references/core/camera-input.md` | 経路H。カメラ固有の実装。正規化、ヒステリシス、One Euro、遅延予算、無言キャリブレーション、入力の可視化、疲労、プライバシー |
+| `references/core/multiplayer-sync.md` | 経路J。非同期／同席／別端末の3択と費用差、同席の割り当て事故と全員同時の入力、決定論生成、P2Pとリレー、権威の置き場、送信レートと遅延の隠し方 |
 | `references/core/calm-experience.md` | 経路I。失敗のない短い体験の設計。緊張の代替供給源、1画面完結、アルバム構成、短さの引き受け方、予算が1/10の時 |
 | `references/core/projection-as-rule.md` | 経路I。不可能幾何。スクリーン空間の接続、固定カメラの損得、テレポート実装、角度への脆さの自動検証、拡張4方向 |
-| `references/art-pipeline.md` | 経路I。美しさと軽さを同時に取る。固定カメラ＝ベイク、AO、テクスチャを持たない設計、色の絞り方、予算と縮退 |
+| `references/art-pipeline.md` | 経路I。美しさと軽さを同時に取る。固定カメラ＝ベイク、AO、**手前／プレイ空間／遠景の3層の役割分担**、色の絞り方、予算と縮退 |
 | `references/core/case-studies-and-metrics.md` | 主張に実証データを添える時。数値と失敗事例 |
 | `references/core/rhythm-and-synesthesia.md` | 音・リズム・光・振動・身体運動の設計。共感覚、Exergame 7指針 |
 | `references/simple/mechanics-and-physics.md` | 5メカニクスの物理実装と数式 |
-| `references/simple/juice-and-feel.md` | シェイク、ヒットストップ、触覚（Webの制約つき）、リトライループ |
-| `references/simple/procedural-generation.md` | 無限生成と難易度カーブ、詰み回避、縦の分岐 |
-| `references/simple/one-button-runner.md` | 自動前進＋タップのランナー。文脈による多義化、速度と報酬、カメラとFOV、予兆、3Dの速度表現 |
+| `references/simple/juice-and-feel.md` | シェイク、ヒットストップ、触覚（Webの制約つき）、リトライループ、巻き戻して復帰する場合の作り方 |
+| `references/simple/procedural-generation.md` | 無限生成と難易度カーブ、詰み回避、縦の分岐、ステージ制にする時の並べ方（1ステージ＝1変数） |
+| `references/simple/one-button-runner.md` | 自動前進＋タップのランナー。文脈による多義化、速度と報酬、**寸法を速度から逆算する順番**、カメラとFOV、予兆、3Dの速度表現 |
 | `references/simple/canon.md` | 名作カタログ（1972〜2023）。企画の参照点 |
 | `references/audio/web-audio-patterns.md` | 素の Web Audio で音を作る |
 | `references/audio/dynamic-music.md` | Tone.js、動的BGM、遷移 |

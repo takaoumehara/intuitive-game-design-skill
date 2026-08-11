@@ -23,7 +23,7 @@ Games work the same way. This skill turns "you'll understand once I explain it" 
 
 ```mermaid
 flowchart TD
-    U["👤 What you ask"] --> R{"🧭 Router<br/>picks 1 of 7 paths"}
+    U["👤 What you ask"] --> R{"🧭 Router<br/>picks 1 of 10 paths"}
 
     R -->|"Design something new"| A["📐 Mechanics pipeline<br/>7 questions → core rules"]
     R -->|"It's confusing"| B["🔍 Intuition audit<br/>10-point score → P0/P1/P2 fixes"]
@@ -32,8 +32,11 @@ flowchart TD
     R -->|"One-tap game / feel"| E["🕹️ Physics, juice,<br/>endless generation"]
     R -->|"Make the sound"| F["🔊 Web Audio, Tone.js,<br/>latency, iOS"]
     R -->|"What should I build it with?"| G["📱 Tech choice<br/>mobile-safe vs PC-only"]
+    R -->|"Control it with face or body"| H["🎥 Input layer<br/>camera input"]
+    R -->|"Quiet and beautiful"| I["🏛️ Calm experience<br/>impossible geometry · art"]
+    R -->|"Play with other people"| J["👥 Co-located<br/>networked sync"]
 
-    A & B & C & D & E & F & G --> Q["✅ 5 questions<br/>every answer passes"]
+    A & B & C & D & E & F & G & H & I & J --> Q["✅ 5 questions<br/>every answer passes"]
     Q --> O["📄 Grounds · How to verify<br/>Priority · What was rejected"]
     O --> L["📝 feedback/log.md"]
     L -->|"hand it back"| FIX["🔁 Skill fix + regression test"]
@@ -180,8 +183,8 @@ The lower variance matters more than the average. A skill that scores well only 
 ## 📁 What's inside
 
 ```
-SKILL.md              Router — 9 paths, 5 questions, the lines not to cross
-references/core/      Affordance, MDA, cognitive load, rhythm & synesthesia, input layer, camera input, impossible geometry, calm experiences
+SKILL.md              Router — 10 paths, 5 questions, the lines not to cross
+references/core/      Affordance, MDA, cognitive load, rhythm & synesthesia, input layer, camera input, impossible geometry, calm experiences, playing together
 references/simple/    One-tap mechanics, juice, the runner build, procedural generation, a canon of hits
 references/audio/     Web Audio, Tone.js, generative AI, platform pitfalls
 references/web-stack.md    Every web visual + audio tech, split by mobile-safe vs PC-only
