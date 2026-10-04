@@ -1,13 +1,16 @@
 # ⚡ intuitive-game-design
 
-[![Claude Code](https://img.shields.io/badge/Claude%20Code-Skill-D97757)](https://claude.com/claude-code)
+[![Claude Code](https://img.shields.io/badge/Claude%20Code-Plugin-D97757)](https://claude.com/claude-code)
+[![Validate plugin](https://github.com/takaoumehara/intuitive-game-design-skill/actions/workflows/validate-plugin.yml/badge.svg)](.github/workflows/validate-plugin.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Eval](https://img.shields.io/badge/eval-97%25%20vs%2066%25%20baseline-2ea44f)](#-funciona-de-verdad)
+[![Eval](https://img.shields.io/badge/eval-re--measurement%20pending-lightgrey)](#-funciona-de-verdad)
 [![Languages](https://img.shields.io/badge/README-5%20languages-blue)](#-intuitive-game-design)
 
 [English](README.md) · [日本語](README.ja.md) · [简体中文](README.zh-CN.md) · **Español** · [한국어](README.ko.md)
 
 > **Crea un juego que nadie necesita que le expliquen: desde la primera idea hasta el sonido que hace.**
+>
+> Un plugin de Claude Code (con un solo skill) para diseño de juegos, sensación de juego y audio. El texto del skill está en inglés; los archivos de referencia que lee están por ahora en japonés. El texto original del skill en japonés se conserva en [`i18n/ja/SKILL.md`](i18n/ja/SKILL.md).
 
 ---
 
@@ -38,7 +41,7 @@ flowchart TD
 
     A & B & C & D & E & F & G & H & I & J --> Q["✅ 5 preguntas que<br/>toda respuesta atraviesa"]
     Q --> O["📄 Fundamento · Cómo verificar<br/>Prioridad · Qué se descartó"]
-    O --> L["📝 feedback/log.md"]
+    O --> L["📝 .claude/feedback/ de tu proyecto"]
     L -->|"lo devuelves"| FIX["🔁 Corrección + prueba de regresión"]
     FIX -.->|"mejora con el uso"| R
 ```
@@ -54,7 +57,7 @@ Cinco preguntas transforman una palabra vaga en un veredicto: si alguien que jue
 Coyote time y buffer de entrada (la versión que consume los dos temporizadores correctamente), un motor de Web Audio con desbloqueo, límite de voces y planificador anticipado, y un generador de niveles que nunca produce un hueco imposible de pasar. Son justo las partes que todo el mundo reescribe y todo el mundo equivoca en algún detalle.
 
 ### 📈 Convierte sus propios fallos en pruebas de regresión
-Cada sesión deja siete líneas en `feedback/log.md`. Devuelve ese archivo y un script transforma los fallos confirmados en casos de eval, así lo corregido se queda corregido en lugar de revertirse en silencio.
+Cada sesión deja siete líneas en `.claude/feedback/intuitive-game-design.md` de tu proyecto. Devuelve ese archivo y un script transforma los fallos confirmados en casos de eval, así lo corregido se queda corregido en lugar de revertirse en silencio.
 
 ---
 
@@ -66,33 +69,46 @@ Cada sesión deja siete líneas en `feedback/log.md`. Devuelve ese archivo y un 
 | «El salto a veces se siente raro» | Ajustar la gravedad a ojo | Coyote time 100–150 ms, buffer 100 ms, código que funciona |
 | «Sin sonido solo en iPhone» | Horas buscando, sin ningún error | Orden de diagnóstico: primero el estado `suspended` |
 | Propuestas de mejora | 10 ítems, ninguno implementado | P0 señalado, con su forma de verificarlo |
-| Puntuación medida en eval | 66% (sin skill) | **97%** en 12 casos |
+| Puntuación en eval | 66% (sin skill) | 97%: ejecución histórica con un conjunto anterior de 12 casos; [pendiente de volver a medir](#-funciona-de-verdad) |
 
 ---
 
 ## 🚀 Instalación y uso
 
-**Requisitos previos:** [Claude Code](https://claude.com/claude-code) (o un entorno compatible que cargue skills). Python 3 solo hace falta para los dos scripts opcionales de feedback.
+**Requisitos previos:** [Claude Code](https://claude.com/claude-code) (o un entorno compatible que cargue skills). Python 3 solo hace falta para los scripts opcionales del repositorio.
 
-### 🖥️ Patrón A — CLI / terminal
+### ⭐ Recomendado — marketplace de plugins de Claude Code
 
-Clona una vez y usa un enlace simbólico para que los cambios se apliquen al instante:
+Dentro de Claude Code:
+
+```
+/plugin marketplace add takaoumehara/intuitive-game-design-skill
+/plugin install intuitive-game-design@intuitive-game-design
+```
+
+Esto instala solo el skill (`skills/intuitive-game-design/`), no los README, los evals ni los archivos generados.
+
+Los patrones siguientes son para otros entornos.
+
+### 🖥️ Patrón A — Instalación manual (CLI / terminal)
+
+Clona una vez y crea un enlace simbólico a la carpeta del skill para que los cambios se apliquen al instante:
 
 ```bash
 git clone https://github.com/takaoumehara/intuitive-game-design-skill.git
-ln -s "$(pwd)/intuitive-game-design-skill" ~/.claude/skills/intuitive-game-design
+ln -s "$(pwd)/intuitive-game-design-skill/skills/intuitive-game-design" ~/.claude/skills/intuitive-game-design
 ```
 
 Si prefieres copiar en lugar de enlazar:
 
 ```bash
 git clone https://github.com/takaoumehara/intuitive-game-design-skill.git
-cp -r intuitive-game-design-skill ~/.claude/skills/intuitive-game-design
+cp -r intuitive-game-design-skill/skills/intuitive-game-design ~/.claude/skills/intuitive-game-design
 ```
 
 ### 🧩 Patrón B — IDE con IA integrada
 
-Claude Code lee los skills desde dos ubicaciones. Ponlo en el proyecto para compartirlo con tu equipo por git:
+Para una instalación manual, Claude Code lee los skills desde dos ubicaciones. Pon el contenido de `skills/intuitive-game-design/` en una de ellas; usa la ruta del proyecto para compartirlo con tu equipo por git:
 
 ```bash
 # Disponible en todos los proyectos
@@ -112,13 +128,19 @@ En Chrome suena, pero en iPhone no se oye nada
 
 ### 🌐 Patrón C — claude.ai (web)
 
-El repositorio ya incluye un archivo listo en [`dist/intuitive-game-design.zip`](dist/intuitive-game-design.zip), generado directamente a partir de los archivos versionados en este repositorio, así que siempre coincide con lo que hay en GitHub.
+Genera el archivo desde el repositorio (empaqueta `skills/intuitive-game-design/` y `LICENSE` en una única carpeta de nivel superior):
+
+```bash
+python3 scripts/package.py          # escribe dist/intuitive-game-design.zip (--out <ruta> para escribirlo en otro sitio)
+```
+
+> El [`dist/intuitive-game-design.zip`](dist/intuitive-game-design.zip) incluido en el repositorio se generó antes del cambio a la estructura de plugin y todavía contiene el texto del skill solo en japonés. Regenéralo como se indica arriba hasta que se suba una copia nueva.
 
 1. En claude.ai, abre **Settings → Capabilities** y activa **Code execution and file creation** si el menú de Skills aparece deshabilitado (solo hace falta en los planes Free/Pro/Max; en Team y Enterprise ya viene activado).
 2. Ve a **Settings → Skills → Create skill**.
 3. Sube `dist/intuitive-game-design.zip`.
 
-> claude.ai solo acepta la extensión `.zip`, y el archivo debe contener una única carpeta de nivel superior con `SKILL.md` directamente dentro. `dist/intuitive-game-design.zip` ya tiene esa estructura. Puedes regenerarlo con `python3 scripts/package.py` después de editar el skill.
+> claude.ai solo acepta la extensión `.zip`, y el archivo debe contener una única carpeta de nivel superior con `SKILL.md` directamente dentro. `scripts/package.py` lo genera con esa estructura y la comprueba.
 
 ### 🛠️ Patrón D — Desde el código fuente
 
@@ -128,13 +150,15 @@ Comprueba que todo funciona antes de instalarlo:
 git clone https://github.com/takaoumehara/intuitive-game-design-skill.git
 cd intuitive-game-design-skill
 
-node --check assets/juice-controller.js     # sintaxis de las implementaciones incluidas
-python3 scripts/log_summary.py feedback/log.md   # las herramientas de feedback se ejecutan
+claude plugin validate --strict .                                     # manifiesto del marketplace
+claude plugin validate --strict .claude-plugin/plugin.json            # manifiesto del plugin
+node --check skills/intuitive-game-design/assets/juice-controller.js  # sintaxis de las implementaciones incluidas
+python3 scripts/log_summary.py feedback/log.md                        # las herramientas de feedback se ejecutan
 ```
 
 ### 💎 Patrón E — Google Gem (Gemini)
 
-Un Gem admite pocos archivos de conocimiento, así que **las ~20 referencias no se pueden subir tal cual.** [`dist/gem/`](dist/gem/) contiene el mismo material plegado en unos pocos archivos.
+Un Gem admite pocos archivos de conocimiento, así que **las ~20 referencias no se pueden subir tal cual.** [`dist/gem/`](dist/gem/) contiene el mismo material plegado en unos pocos archivos. El `dist/gem/` incluido en el repositorio es anterior al texto del skill en inglés; regenéralo para obtener la versión actual.
 
 1. Pega `dist/gem/instructions.md` en el campo **Instrucciones** del Gem
 2. Sube los **7 archivos** de `dist/gem/split/` como conocimiento
@@ -142,18 +166,18 @@ Un Gem admite pocos archivos de conocimiento, así que **las ~20 referencias no 
 Si el límite es menor, sube el único archivo de `dist/gem/single/` (contenido idéntico). Si el campo de instrucciones se queda corto, usa `instructions-short.md`. Pasos completos: [`gem/SETUP.md`](gem/SETUP.md).
 
 ```bash
-python3 scripts/build_gem.py   # reconstruir tras editar el skill
+python3 scripts/build_gem.py   # reconstruir tras editar el skill (--out <dir> para escribirlo en otro sitio)
 ```
 
 ### 🔁 Mejorarlo mientras lo usas
 
-Al terminar, el skill añade siete líneas a `feedback/log.md`. Cuando tengas varias entradas, devuelve el archivo:
+Al terminar, el skill añade siete líneas a `.claude/feedback/intuitive-game-design.md` **de tu proyecto**, no dentro de la carpeta del skill, que se reemplaza cada vez que se actualiza el plugin. El [`feedback/log.md`](feedback/log.md) de este repositorio es el registro seleccionado por el mantenedor. Cuando tengas varias entradas, devuelve tu archivo:
 
 > Lee este registro y mejora el skill
 
 ```bash
-python3 scripts/log_summary.py feedback/log.md    # qué se repite, qué volvió a fallar
-python3 scripts/log_to_eval.py feedback/log.md    # fallos → pruebas de regresión
+python3 scripts/log_summary.py path/to/intuitive-game-design.md    # qué se repite, qué volvió a fallar
+python3 scripts/log_to_eval.py path/to/intuitive-game-design.md    # fallos → pruebas de regresión
 ```
 
 La línea que más importa es `Corrected:`: lo que tuviste que decir dos veces, con tus propias palabras. Si lo dijiste una vez y no funcionó, es una instrucción que falta en el skill, y es la única señal que el skill no puede evaluarse a sí mismo. Ver [`feedback/README.md`](feedback/README.md).
@@ -162,7 +186,9 @@ La línea que más importa es `Corrected:`: lo que tuviste que decir dos veces, 
 
 ## 📊 ¿Funciona de verdad?
 
-Doce consultas reales, cada una respondida dos veces: una con el skill y otra con el mismo modelo sin él. La calificación la hizo un tercer modelo independiente contra 64 afirmaciones objetivas.
+> **Estado: pendiente de volver a medir.** Las cifras de abajo vienen de una **ejecución histórica con un conjunto anterior de 12 casos / 64 afirmaciones**. El conjunto actual de [`evals/evals.json`](evals/evals.json) tiene **21 casos / 158 afirmaciones** (las rutas G–J se añadieron después) y todavía no se ha vuelto a ejecutar. Las respuestas originales, la salida de la calificación, los nombres de los modelos y la fecha de esa ejecución **no se subieron al repositorio**, así que no se puede reproducir a partir de él: tómalo como un resultado previo sin verificar. Lo que una nueva medición debe subir al repositorio se detalla en [`evals/README.md`](evals/README.md).
+
+Ejecución histórica: doce consultas reales, cada una respondida dos veces: una con el skill y otra con el mismo modelo sin él. La calificación la hizo un tercer modelo independiente contra 64 afirmaciones objetivas.
 
 | Área | Con skill | Sin skill |
 |---|---|---|
@@ -174,27 +200,34 @@ Doce consultas reales, cada una respondida dos veces: una con el skill y otra co
 
 La menor variación importa más que el promedio. Algo que solo a veces sale bien no es algo en lo que puedas apoyarte.
 
-**Lo que cuesta:** unas 1,9 veces más tokens y alrededor de 80 segundos más por respuesta, porque el skill lee archivos de referencia antes de responder.
+**Lo que costó en esa ejecución:** unas 1,9 veces más tokens y alrededor de 80 segundos más por respuesta, porque el skill lee archivos de referencia antes de responder. Esto también hay que volver a medirlo: el texto del skill se ha traducido al inglés desde entonces, y eso cambia su tamaño.
 
-**Lo que detectó la calificación:** el skill entregaba código que importaba archivos que el usuario no tenía, filtraba sus propios números de sección internos al texto visible, y perdió contra el modelo sin skill en un caso. Los tres están corregidos y los tres son ahora pruebas de regresión. Medir con honestidad saca esto a la luz; una puntuación sola lo esconde.
+**Lo que detectó la calificación:** el skill entregaba código que importaba archivos que el usuario no tenía, filtraba sus propios números de sección internos al texto visible, y perdió contra el modelo sin skill en un caso. Los tres se corrigieron y se convirtieron en pruebas de regresión que forman parte del conjunto actual. Medir con honestidad saca esto a la luz; una puntuación sola lo esconde.
 
 ---
 
 ## 📁 Qué contiene
 
 ```
-SKILL.md              Enrutador: 10 rutas, 5 preguntas, los límites que no se cruzan
-references/core/      Affordance, MDA, carga cognitiva, ritmo y sinestesia, capa de entrada, cámara, geometría imposible, experiencias serenas, jugar en compañía
-references/simple/    Mecánicas de un toque, juice, construcción de runners, generación procedural, clásicos
-references/audio/     Web Audio, Tone.js, IA generativa, trampas de cada plataforma
-references/web-stack.md    Todas las tecnologías visuales y de audio: móvil vs PC
-references/art-pipeline.md Belleza y ligereza al mismo tiempo
-workflows/            Diseño · Auditoría de intuición · Protocolo de pruebas
-assets/               Código ejecutable: sensación, generador de niveles, audio, efectos
-feedback/             El ciclo de mejora
-scripts/              Registro → prueba de regresión · package.py regenera el zip de claude.ai
-dist/                 Zip listo para claude.ai (Settings → Skills)
+.claude-plugin/         plugin.json + marketplace.json (instalación con /plugin)
+skills/intuitive-game-design/
+  SKILL.md              Enrutador: 10 rutas, 5 preguntas, los límites que no se cruzan (en inglés)
+  references/core/      Affordance, MDA, carga cognitiva, ritmo y sinestesia, capa de entrada, cámara, geometría imposible, experiencias serenas, jugar en compañía
+  references/simple/    Mecánicas de un toque, juice, construcción de runners, generación procedural, clásicos
+  references/audio/     Web Audio, Tone.js, IA generativa, trampas de cada plataforma
+  references/web-stack.md    Todas las tecnologías visuales y de audio: móvil vs PC
+  references/art-pipeline.md Belleza y ligereza al mismo tiempo
+  workflows/            Diseño · Auditoría de intuición · Protocolo de pruebas (procedimientos en markdown)
+  assets/               Código ejecutable: sensación, generador de niveles, audio, efectos
+i18n/ja/SKILL.md        Texto original del skill en japonés (solo como referencia; Claude no lo carga)
+feedback/               El ciclo de mejora (procedimiento + registro seleccionado por el mantenedor)
+evals/                  Casos de eval (21 casos / 158 afirmaciones) y requisitos para volver a medir
+scripts/                Registro → prueba de regresión · package.py genera el zip de claude.ai, build_gem.py la exportación para Gem
+gem/                    Texto de instrucciones para Google Gem (build_gem.py escribe dist/gem/)
+dist/                   Zip para claude.ai y exportación para Gem ya generados (ahora desactualizados: regenéralos, ver arriba)
 ```
+
+Los archivos de `references/` y `workflows/` están por ahora en japonés; Claude los lee y te responde en tu idioma.
 
 ---
 

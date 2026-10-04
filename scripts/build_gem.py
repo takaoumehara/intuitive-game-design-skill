@@ -19,9 +19,14 @@ its heading, so the cross-references already written inside the documents
 ("`references/simple/juice-and-feel.md` を読む") still resolve — the model finds
 the heading by name instead of opening a file.
 
+Source paths below are relative to the skill folder (skills/intuitive-game-design/),
+which is also how the documents refer to each other.
+
 Usage:
-    python3 scripts/build_gem.py
+    python3 scripts/build_gem.py                    # writes dist/gem/
+    python3 scripts/build_gem.py --out /tmp/gem     # writes somewhere else
 """
+import argparse
 import re
 import shutil
 import subprocess
@@ -29,6 +34,8 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+SKILL_DIR = ROOT / "skills" / "intuitive-game-design"
+SKILL_PREFIX = SKILL_DIR.relative_to(ROOT).as_posix() + "/"
 OUT = ROOT / "dist" / "gem"
 
 # (output file, human title, [source paths in order])
@@ -113,7 +120,7 @@ def strip_front_matter(text):
 
 def embed(path):
     """1ファイルを、元のパスを見出しに持つ節として整形する。"""
-    raw = (ROOT / path).read_text(encoding="utf-8")
+    raw = (SKILL_DIR / path).read_text(encoding="utf-8")
     if path == "SKILL.md":
         raw, _ = strip_front_matter(raw)
     if path.endswith(".js"):
@@ -132,12 +139,23 @@ def embed(path):
 
 
 def tracked():
+    """git 管理下のスキル内ファイルを、スキルフォルダからの相対パスで返す。"""
     out = subprocess.run(["git", "ls-files"], cwd=ROOT, capture_output=True,
                          text=True, check=True).stdout.split()
-    return set(out)
+    return {f[len(SKILL_PREFIX):] for f in out if f.startswith(SKILL_PREFIX)}
 
 
 def main():
+    global OUT
+    ap = argparse.ArgumentParser(description="Repackage the skill for a Google Gem.")
+    ap.add_argument("--out", type=Path, help="output directory (default: dist/gem)")
+    args = ap.parse_args()
+    if args.out:
+        OUT = args.out.resolve()
+        # 出力先は丸ごと消して作り直すので、リポジトリやその親を指していたら止める
+        if ROOT.is_relative_to(OUT):
+            sys.exit(f"--out {OUT} would delete the repository; pick an empty directory")
+
     files = tracked()
     listed = {p for _, _, srcs in BUNDLES for p in srcs}
     missing = sorted(p for p in listed if p not in files)
@@ -184,7 +202,7 @@ def main():
             sys.exit(f"missing {f.relative_to(ROOT)} — 指示文は手書きで維持します")
         shutil.copy(f, OUT / f.name)
 
-    print(f"{OUT.relative_to(ROOT)}/")
+    print(f"{OUT.relative_to(ROOT) if OUT.is_relative_to(ROOT) else OUT}/")
     print("  split/   （推奨：ナレッジ7ファイル）")
     for name, n in report:
         print(f"    {name:<32} {n:>7,} 文字")
