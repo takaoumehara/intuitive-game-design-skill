@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>intuitive-game-design: games nobody has to read instructions for</title>
+  <meta name="description" data-i18n-key="meta.description" content="A Claude Code skill for games a first-time player understands with no manual: intuition design and diagnosis, game feel, Web Audio, camera input, calm puzzles and multiplayer sync. One router, ten paths.">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="canonical" href="https://takaoumehara.github.io/intuitive-game-design-skill/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="intuitive-game-design">
+  <meta property="og:title" content="intuitive-game-design: games nobody has to read instructions for">
+  <meta property="og:description" content="From the first idea to the sound it makes. One router, ten paths, working implementations for game feel and Web Audio.">
+  <meta property="og:url" content="https://takaoumehara.github.io/intuitive-game-design-skill/">
+  <meta property="og:image" content="https://takaoumehara.github.io/intuitive-game-design-skill/assets/img/hero.svg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&amp;family=Noto+Sans+JP:wght@400;500;700&amp;display=swap">
+  <link rel="stylesheet" href="assets/style.css">
+  <style>
+    /* Page-level tweaks: long install commands and brand names must not widen the hero grid or push the nav tools off-screen. */
+    .hero-grid > div, .grid > *, .demo-teaser > * { min-width: 0; }
+    p code, li code, td code, summary code, details code { white-space: normal; overflow-wrap: anywhere; }
+    .install-line { max-width: 100% !important; }
+    .install-line span { min-width: 0; }
+    .install-line .prompt, .install-line [data-copy] { flex: none !important; }
+    @media (max-width: 519px) {
+      .brand { flex-shrink: 1; min-width: 0; }
+      .brand span { overflow: hidden; text-overflow: ellipsis; }
+    }
+  </style>
+  <script src="assets/boot.js" data-loader></script>
+</head>
+<body data-title-key="meta.title">
+  <div class="loader" aria-hidden="true">
+    <div class="loader-mark"><span class="loader-word">intuitive-game-design</span><span class="loader-rule"></span></div>
+  </div>
+  <a class="skip-link" href="#main" data-i18n="ui.skip">Skip to content</a>
+
+  <header class="nav">
+    <div class="container">
+      <a class="brand" href="./" aria-label="intuitive-game-design home">
+        <img src="assets/favicon.svg" alt="" width="22" height="22">
+        <span>intuitive-game-design</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#what" data-i18n="nav.what">What it is</a></li>
+        <li><a href="#paths" data-i18n="nav.paths">Router paths</a></li>
+        <li><a href="#features" data-i18n="nav.features">Features</a></li>
+        <li><a href="#install" data-i18n="nav.install">Install</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+      <div class="nav-tools">
+        <a class="icon-btn nav-demo" href="#install" data-i18n="nav.cta">Install</a>
+        <button class="icon-btn" type="button" data-lang-toggle aria-label="日本語に切り替え" lang="ja"><span class="lang-long">日本語</span><span class="lang-short" aria-hidden="true">JA</span></button>
+        <button class="icon-btn" type="button" data-theme-toggle aria-label="Toggle theme"></button>
+        <a class="icon-btn" href="https://github.com/takaoumehara/intuitive-game-design-skill" aria-label="GitHub repository" title="GitHub">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.4-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>
+        </a>
+        <button class="icon-btn menu-btn" type="button" data-menu-toggle aria-expanded="false" aria-controls="mobile-menu" aria-label="Menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M4 8h16M4 16h16"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+  <nav class="mobile-menu" id="mobile-menu" aria-label="Sections">
+    <a href="#what" data-i18n="nav.what">What it is</a>
+    <a href="#paths" data-i18n="nav.paths">Router paths</a>
+    <a href="#features" data-i18n="nav.features">Features</a>
+    <a href="#install" data-i18n="nav.install">Install</a>
+    <a href="#faq">FAQ</a>
+  </nav>
+
+  <main id="main">
+    <!-- ================= HERO ================= -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-meta">
+          <span class="eyebrow" data-i18n="hero.eyebrow">Claude Code plugin · MIT</span>
+          <span>v1.0.0 · 1 skill · 10 paths</span>
+        </div>
+        <h1 style="font-size:clamp(2.6rem, 1.2rem + 6vw, 6.4rem)">intuitive&#8209;<br>game&#8209;design</h1>
+        <div class="hero-grid">
+          <p class="tagline" data-i18n="hero.tagline">Games nobody has to read instructions for.</p>
+          <div>
+            <p class="lead" data-i18n="hero.lead">A good door tells you whether to push or pull by its shape. When it needs a sign that says PUSH, it has already failed. This skill turns “you'll get it once I explain” into “you get it without being told” — then makes it feel good to touch and sound like something.</p>
+            <ul class="meta-list" aria-label="Areas">
+              <li>Design</li><li>Feel</li><li>Audio</li><li>Input</li><li>Playtest</li>
+            </ul>
+            <div class="cta">
+              <a class="btn btn-primary" href="#install"><span data-i18n="hero.ctaStart">Install the plugin</span><span class="arr" aria-hidden="true">→</span></a>
+              <a class="btn btn-ghost" href="#paths" data-i18n="hero.ctaPaths">See the ten paths</a>
+              <a class="btn btn-link" href="https://github.com/takaoumehara/intuitive-game-design-skill">GitHub</a>
+            </div>
+            <div class="install-line" style="max-width:560px">
+              <span class="prompt">&gt;</span><span id="hero-cmd">/plugin marketplace add takaoumehara/intuitive-game-design-skill</span>
+              <span data-copy="hero-cmd" style="flex:0"></span>
+            </div>
+          </div>
+        </div>
+        <figure class="hero-art">
+          <img class="diagram" src="assets/img/hero.svg" width="1200" height="420" alt="A player's first move succeeds without a manual. A router picks one of ten paths, A to J, and every answer passes five questions." data-i18n-attr="alt:hero.alt">
+        </figure>
+      </div>
+    </section>
+
+    <!-- ================= WHAT ================= -->
+    <section id="what">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <p class="sec-label"><span class="sec-num">01</span><span class="eyebrow" data-i18n="what.eyebrow">What it is</span></p>
+          <div>
+            <h2 data-i18n="what.title">“Intuitive” as something you can check</h2>
+            <p class="lead" data-i18n="what.lead">Five questions turn a vague word into a verdict. Every answer ships with its grounds, a way to verify it, a P0/P1/P2 priority and what was rejected.</p>
+          </div>
+        </div>
+        <ul class="paths" data-reveal>
+          <li><span class="num">Q1</span><div><h3 data-i18n="what.q1Title">First-30-seconds test</h3><p data-i18n="what.q1Body">Can a first-timer make the first move with zero explanation?</p></div></li>
+          <li><span class="num">Q2</span><div><h3 data-i18n="what.q2Title">Affordance gap</h3><p data-i18n="what.q2Body">Name exactly where what the player perceives differs from what is real.</p></div></li>
+          <li><span class="num">Q3</span><div><h3 data-i18n="what.q3Title">At most four new things at once</h3><p data-i18n="what.q3Body">Respect the working-memory limit when introducing rules.</p></div></li>
+          <li><span class="num">Q4</span><div><h3 data-i18n="what.q4Title">Tight coupling</h3><p data-i18n="what.q4Body">Before adding a rule, can an existing variable carry the depth instead?</p></div></li>
+          <li><span class="num">Q5</span><div><h3 data-i18n="what.q5Title">Three-layer feedback</h3><p data-i18n="what.q5Body">Are pre, immediate and post feedback all present?</p></div></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ================= ROUTER PATHS ================= -->
+    <section id="paths">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <p class="sec-label"><span class="sec-num">02</span><span class="eyebrow" data-i18n="paths.eyebrow">Router paths</span></p>
+          <div>
+            <h2 data-i18n="paths.title">Say what you are working on. It picks one of ten paths.</h2>
+            <p class="lead" data-i18n="paths.lead">The skill reads only the references that path needs, then answers in your language.</p>
+          </div>
+        </div>
+        <div class="table-wrap" data-reveal><table>
+          <thead><tr><th data-i18n="paths.thPath">Path</th><th data-i18n="paths.thWhen">When you say…</th><th data-i18n="paths.thGet">You get</th></tr></thead>
+          <tbody>
+            <tr><td data-i18n="paths.a"><b>A</b> · New design</td><td data-i18n="paths.aWhen">“Come up with a mechanic”</td><td data-i18n="paths.aGet">Seven questions → core rules</td></tr>
+            <tr><td data-i18n="paths.b"><b>B</b> · Diagnosis</td><td data-i18n="paths.bWhen">“The tutorial is too long, players drop off”</td><td data-i18n="paths.bGet">10-point intuition audit → P0/P1/P2 fixes</td></tr>
+            <tr><td data-i18n="paths.c"><b>C</b> · Genre detail</td><td data-i18n="paths.cWhen">“How should a rhythm game UI work?”</td><td data-i18n="paths.cGet">Genre conventions and patterns</td></tr>
+            <tr><td data-i18n="paths.d"><b>D</b> · Playtesting</td><td data-i18n="paths.dWhen">“What do I ask testers?”</td><td data-i18n="paths.dGet">CARD / ORID protocol</td></tr>
+            <tr><td data-i18n="paths.e"><b>E</b> · Tiny games &amp; feel</td><td data-i18n="paths.eWhen">“The jump sometimes doesn't respond”</td><td data-i18n="paths.eGet">Physics, juice, endless generation</td></tr>
+            <tr><td data-i18n="paths.f"><b>F</b> · Sound</td><td data-i18n="paths.fWhen">“Silent only on iPhone”</td><td data-i18n="paths.fGet">Web Audio, Tone.js, latency, iOS</td></tr>
+            <tr><td data-i18n="paths.g"><b>G</b> · Tech choice</td><td data-i18n="paths.gWhen">“Three.js or PixiJS? Will it run on phones?”</td><td data-i18n="paths.gGet">Mobile-safe vs PC-only, by technique</td></tr>
+            <tr><td data-i18n="paths.h"><b>H</b> · Input beyond taps</td><td data-i18n="paths.hWhen">“Control it with my face or body”</td><td data-i18n="paths.hGet">Input layer and camera input</td></tr>
+            <tr><td data-i18n="paths.i"><b>I</b> · Quiet &amp; beautiful</td><td data-i18n="paths.iWhen">“Like Monument Valley”</td><td data-i18n="paths.iGet">Calm experience, impossible geometry, art pipeline</td></tr>
+            <tr><td data-i18n="paths.j"><b>J</b> · Playing together</td><td data-i18n="paths.jWhen">“Let two friends play online”</td><td data-i18n="paths.jGet">Co-located and networked sync</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+    </section>
+
+    <!-- ================= FEATURES ================= -->
+    <section id="features">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <p class="sec-label"><span class="sec-num">03</span><span class="eyebrow" data-i18n="feat.eyebrow">Features</span></p>
+          <div>
+            <h2 data-i18n="feat.title">Working code for the parts everyone gets subtly wrong</h2>
+            <p class="lead" data-i18n="feat.lead">Not just advice. The skill ships runnable implementations you can drop into a web game.</p>
+          </div>
+        </div>
+        <div class="cols cols-3" data-reveal>
+          <article class="col">
+            <span class="col-k">juice-controller.js</span>
+            <h3 data-i18n="feat.c1Title">Coyote time &amp; input buffer</h3>
+            <p data-i18n="feat.c1Body">Coyote time 100–150 ms and a 100 ms input buffer that consume both timers correctly — the fix for “the jump sometimes doesn't respond”.</p>
+          </article>
+          <article class="col">
+            <span class="col-k">audio-engine.js</span>
+            <h3 data-i18n="feat.c2Title">A Web Audio engine</h3>
+            <p data-i18n="feat.c2Body">Unlock on first gesture, voice limits and a look-ahead scheduler. Diagnoses iPhone silence by checking the <code>suspended</code> state first.</p>
+          </article>
+          <article class="col">
+            <span class="col-k">chunk-generator.js</span>
+            <h3 data-i18n="feat.c3Title">A level generator that stays fair</h3>
+            <p data-i18n="feat.c3Body">Endless chunks that provably never produce an unclearable gap.</p>
+          </article>
+        </div>
+
+        <div class="demo-teaser" data-reveal>
+          <div>
+            <span class="eyebrow" data-i18n="feat.loopEyebrow">Gets better with use</span>
+            <h3 data-i18n="feat.loopTitle">Failures become regression tests</h3>
+            <ol class="steps">
+              <li data-i18n="feat.s1">Each session appends seven lines to <code>.claude/feedback/intuitive-game-design.md</code> in your project.</li>
+              <li data-i18n="feat.s2">The line that matters most is <b>Corrected:</b> — what you had to say twice.</li>
+              <li data-i18n="feat.s3">Hand the file back. A script turns confirmed failures into eval cases, so a fix stays fixed.</li>
+            </ol>
+          </div>
+          <div class="note">
+            <span class="eyebrow" data-i18n="feat.evalEyebrow">Eval · honest status</span>
+            <p class="muted" data-i18n="feat.evalBody">A <b>historical</b> run on an earlier 12-case / 64-assertion set scored <b>97%</b> with the skill against <b>66%</b> without it, graded by an independent model. Its raw answers, model names and date were not committed, so treat it as unverified. The current suite has 21 cases / 158 assertions; <b>re-measurement is pending</b>.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= INSTALL ================= -->
+    <section id="install">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <p class="sec-label"><span class="sec-num">04</span><span class="eyebrow" data-i18n="in.eyebrow">Install</span></p>
+          <div>
+            <h2 data-i18n="in.title">Two lines in Claude Code</h2>
+            <p class="lead" data-i18n="in.lead">The plugin installs only the skill — not the READMEs, evals or build output. Restart, then say what you are working on.</p>
+          </div>
+        </div>
+        <div class="grid grid-2" data-reveal>
+          <div>
+            <div class="tabs">
+              <div class="tablist" role="tablist" aria-label="Install method">
+                <button role="tab" id="in-plugin" data-key="plugin" aria-controls="in-plugin-p" aria-selected="true" data-i18n="in.tabPlugin">Claude Code plugin</button>
+                <button role="tab" id="in-manual" data-key="manual" aria-controls="in-manual-p" aria-selected="false" data-i18n="in.tabManual">Manual</button>
+                <button role="tab" id="in-web" data-key="web" aria-controls="in-web-p" aria-selected="false">claude.ai</button>
+              </div>
+              <div class="tabpanel" role="tabpanel" id="in-plugin-p" aria-labelledby="in-plugin">
+                <div class="code"><span class="lang">claude code</span><pre><code>/plugin marketplace add takaoumehara/intuitive-game-design-skill
+/plugin install intuitive-game-design@intuitive-game-design</code></pre></div>
+                <p class="muted small" data-i18n="in.pluginNote">Recommended.</p>
+              </div>
+              <div class="tabpanel" role="tabpanel" id="in-manual-p" aria-labelledby="in-manual" hidden>
+                <div class="code"><span class="lang">bash</span><pre><code>git clone https://github.com/takaoumehara/intuitive-game-design-skill.git
+ln -s "$(pwd)/intuitive-game-design-skill/skills/intuitive-game-design" \
+  ~/.claude/skills/intuitive-game-design</code></pre></div>
+                <p class="muted small" data-i18n="in.manualNote">Symlink so edits take effect immediately, or copy into <code>&lt;project&gt;/.claude/skills/</code> to share with your team through git.</p>
+              </div>
+              <div class="tabpanel" role="tabpanel" id="in-web-p" aria-labelledby="in-web" hidden>
+                <div class="code"><span class="lang">bash</span><pre><code>python3 scripts/package.py   # writes dist/intuitive-game-design.zip</code></pre></div>
+                <p class="muted small" data-i18n="in.webNote">Upload the zip in Settings → Skills. Rebuild it yourself; the committed zip predates the plugin layout.</p>
+              </div>
+            </div>
+          </div>
+          <div>
+            <h3 data-i18n="in.tryTitle">Then try</h3>
+            <div class="code"><span class="lang">prompt</span><pre><code>The tutorial in my mobile action game is 7 screens
+long and 30% of players drop off there.</code></pre></div>
+            <div class="code"><span class="lang">prompt</span><pre><code>Players tell me the jump "sometimes doesn't respond."</code></pre></div>
+            <div class="code"><span class="lang">prompt</span><pre><code>Sound works in Chrome but there's nothing on iPhone.</code></pre></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FAQ ================= -->
+    <section id="faq">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <p class="sec-label"><span class="sec-num">05</span><span class="eyebrow">FAQ</span></p>
+          <div>
+            <h2 data-i18n="faq.title">Frequently asked questions</h2>
+          </div>
+        </div>
+        <div class="faq-list" data-reveal>
+        <details class="faq"><summary data-i18n="faq.q1">Do I have to choose a path myself?</summary><div data-i18n="faq.a1">No. Describe the problem in your own words. The router picks one of the ten paths and loads only what that path needs.</div></details>
+        <details class="faq"><summary data-i18n="faq.q2">Is it only for web games?</summary><div data-i18n="faq.a2">The design, diagnosis and playtest paths apply to any game. The bundled implementations, sound path and tech-choice path focus on the web stack.</div></details>
+        <details class="faq"><summary data-i18n="faq.q3">How reliable is the 97% figure?</summary><div data-i18n="faq.a3">It is a historical result on an earlier 12-case set, and the raw outputs were not committed, so it cannot be reproduced from the repository. The current 21-case / 158-assertion suite has not been re-run yet. <code>evals/README.md</code> lists what a re-measurement must commit.</div></details>
+        <details class="faq"><summary data-i18n="faq.q4">Does it cost more tokens?</summary><div data-i18n="faq.a4">In the historical run, roughly 1.9× the tokens and about 80 seconds more per answer, because it reads reference files before answering. This is also to be re-measured.</div></details>
+        <details class="faq"><summary data-i18n="faq.q5">Can I use it in Japanese?</summary><div data-i18n="faq.a5">Yes. The skill body is in English and the reference files are currently in Japanese. Claude reads both and answers in your language.</div></details>
+        <details class="faq"><summary data-i18n="faq.q6">Does it work outside Claude?</summary><div data-i18n="faq.a6">There is a claude.ai zip and a Google Gem export under <code>dist/</code>. Both are currently stale; rebuild them with the scripts in the repository.</div></details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="foot-word" aria-hidden="true" style="overflow-wrap:anywhere">intuitive-game-design</div>
+      <div class="foot-row">
+        <span>© <span id="year">2026</span> intuitive-game-design · <span data-i18n="footer.license">MIT License</span></span>
+        <span class="foot-links">
+          <a href="https://github.com/takaoumehara/intuitive-game-design-skill">GitHub</a>
+          <a href="https://github.com/takaoumehara/intuitive-game-design-skill/blob/main/skills/intuitive-game-design/SKILL.md">SKILL.md</a>
+          <a href="https://github.com/takaoumehara/intuitive-game-design-skill/blob/main/evals/README.md" data-i18n="footer.evals">Evals</a>
+        </span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/i18n.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>
