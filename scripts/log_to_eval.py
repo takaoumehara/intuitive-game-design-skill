@@ -7,14 +7,27 @@
 テストとして固定して初めて、修正が永続する。ログを回帰テストに変えるのが
 「使うほど良くなる」の実体。
 
+ログの場所:
+    スキルは使用中、ユーザーのプロジェクトの .claude/feedback/intuitive-game-design.md
+    に記録する（プラグインのスキルディレクトリは更新で置き換わるため）。
+    このリポジトリの feedback/log.md は、渡されたログをメンテナーが整理して載せたもの。
+    どちらのファイルも同じ形式なので、そのまま渡せる。見出しは日本語版の
+    「経路<A〜J>」でも英語版の「Route <A–J>」でもよい。
+
 使い方:
     python3 scripts/log_to_eval.py feedback/log.md              # 雛形を表示
     python3 scripts/log_to_eval.py feedback/log.md --write      # evals/evals.json へ追記
+    python3 scripts/log_to_eval.py <project>/.claude/feedback/intuitive-game-design.md
+
+--write の追記先は、実行した場所に関係なくこのリポジトリの evals/evals.json。
 """
 import json
 import re
 import sys
 from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+EVALS = ROOT / "evals" / "evals.json"
 
 FIELDS = ["Read", "Output", "Corrected", "Missed", "Wrong", "Unused", "Verdict"]
 NONE_WORDS = {"なし", "none", "-", "n/a", ""}
@@ -26,8 +39,8 @@ PATTERNS = [
      "コード内に、ユーザーが持っていないファイルへの import が含まれていない（コピーしてそのまま実行できる）"),
     (r"存在しない|実在しない|そんなAPI|deprecated|廃止",
      "提示されたコードに、実在しないAPI・メソッドの呼び出しが含まれていない"),
-    (r"経路|問い\d|SKILL\.md|references/|workflows/|章番号|内部用語",
-     "スキル内部の呼び名（経路A〜F、問い1〜5、ファイルパスや章番号）をユーザー向け本文に出していない"),
+    (r"経路|[Rr]oute [A-J]\b|問い\d|[Qq]uestion \d|SKILL\.md|references/|workflows/|章番号|内部用語",
+     "スキル内部の呼び名（経路A〜J、問い1〜5、ファイルパスや章番号）をユーザー向け本文に出していない"),
     (r"優先度|P0|P1|P2",
      "各修正案に優先度（P0/P1/P2）が付いている"),
     (r"検証方法|どうなれば成功|測れ",
@@ -133,7 +146,7 @@ def main():
         print()
 
     if write:
-        p = Path("evals/evals.json")
+        p = EVALS
         d = json.loads(p.read_text(encoding="utf-8"))
         next_id = max((x["id"] for x in d["evals"]), default=-1) + 1
         for s in stubs:
@@ -141,7 +154,7 @@ def main():
             next_id += 1
             d["evals"].append(s)
         p.write_text(json.dumps(d, ensure_ascii=False, indent=2), encoding="utf-8")
-        print(f"evals/evals.json に {len(stubs)} 件を追記しました。")
+        print(f"{p.relative_to(ROOT)} に {len(stubs)} 件を追記しました。")
         print("必ずアサーションを観測可能な形に書き直してから使ってください。")
         print("「良い回答をする」のような主観的アサーションは、通してしまうので意味がありません。")
     else:

@@ -53,11 +53,11 @@ dist/gem/
 
 Gem 版で落ちているのは次の2つです。どちらもファイルへ書き込む機能に依存していて、Gem では実行できません。
 
-- **`feedback/log.md` への記録**（使うたびに7行残し、スキル自身を直す仕組み）
+- **フィードバックログへの記録**（使うたびにプロジェクトの `.claude/feedback/intuitive-game-design.md` へ7行残し、スキル自身を直す仕組み）
 - **`evals/` による回帰テスト**
 
 継続的にスキルを育てたい場合は、Claude Code 版を本体として、Gem 版はその**書き出し**として扱ってください。本体を更新したら `python3 scripts/build_gem.py` を回し、Gem のナレッジを差し替えます。
 
 ## 元になっているファイル
 
-`dist/gem/` は生成物です。**直接編集しないでください。** 直すのは元のリファレンス（`references/`、`workflows/`、`assets/`、`SKILL.md`）と、手順文（`gem/instructions.md`、`gem/instructions-short.md`）のほうです。ビルドし直すと上書きされます。
+`dist/gem/` は生成物です。**直接編集しないでください。** 直すのは元のリファレンス（`skills/intuitive-game-design/` 以下の `references/`、`workflows/`、`assets/`、`SKILL.md`）と、手順文（`gem/instructions.md`、`gem/instructions-short.md`）のほうです。ビルドし直すと上書きされます。

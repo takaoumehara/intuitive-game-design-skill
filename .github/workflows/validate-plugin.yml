@@ -1,0 +1,49 @@
+name: Validate plugin
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Claude Code CLI
+        run: npm install -g @anthropic-ai/claude-code
+
+      # `claude plugin validate` only reads local files, so no secrets are
+      # passed here. Verified 2026-10-04 (Claude Code 2.1.283) to run
+      # without login using an empty config dir.
+      - name: Validate marketplace manifest (repo root)
+        run: claude plugin validate --strict .
+
+      - name: Validate plugin manifest
+        run: claude plugin validate --strict .claude-plugin/plugin.json
+
+      - name: Check bundled JavaScript parses
+        run: |
+          for f in skills/intuitive-game-design/assets/*.js; do
+            node --check "$f"
+          done
+
+      - name: Check repo scripts (outputs go to a temp dir, dist/ is untouched)
+        run: |
+          python3 -m py_compile scripts/*.py
+          python3 scripts/package.py --out "$RUNNER_TEMP/pkg/intuitive-game-design.zip"
+          python3 scripts/build_gem.py --out "$RUNNER_TEMP/gem"
+          python3 scripts/log_summary.py feedback/log.md
+          python3 scripts/log_to_eval.py feedback/log.md
+          python3 -c "import json; json.load(open('evals/evals.json'))"

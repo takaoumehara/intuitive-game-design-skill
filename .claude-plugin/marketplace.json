@@ -1,0 +1,26 @@
+{
+  "name": "intuitive-game-design",
+  "owner": {
+    "name": "Takao Umehara",
+    "url": "https://github.com/takaoumehara"
+  },
+  "metadata": {
+    "description": "Marketplace for the intuitive-game-design Claude Code plugin."
+  },
+  "plugins": [
+    {
+      "name": "intuitive-game-design",
+      "source": "./",
+      "description": "Design and build games a first-time player understands with no manual or tutorial: intuition design and diagnosis, one-tap game feel, Web Audio sound, camera/body input, calm puzzle games, and multiplayer sync.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Takao Umehara"
+      },
+      "homepage": "https://github.com/takaoumehara/intuitive-game-design-skill",
+      "repository": "https://github.com/takaoumehara/intuitive-game-design-skill",
+      "license": "MIT",
+      "keywords": ["game-design", "game-feel", "playtest", "web-audio"],
+      "category": "design"
+    }
+  ]
+}

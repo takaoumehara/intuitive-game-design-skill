@@ -1,0 +1,22 @@
+{
+  "name": "intuitive-game-design",
+  "version": "1.0.0",
+  "description": "Design and build games a first-time player understands with no manual or tutorial: intuition design and diagnosis, one-tap game feel, Web Audio sound, camera/body input, calm puzzle games, and multiplayer sync.",
+  "author": {
+    "name": "Takao Umehara",
+    "url": "https://github.com/takaoumehara"
+  },
+  "homepage": "https://github.com/takaoumehara/intuitive-game-design-skill",
+  "repository": "https://github.com/takaoumehara/intuitive-game-design-skill",
+  "license": "MIT",
+  "keywords": [
+    "game-design",
+    "game-feel",
+    "playtest",
+    "onboarding",
+    "affordance",
+    "one-button-game",
+    "web-audio",
+    "skill"
+  ]
+}
